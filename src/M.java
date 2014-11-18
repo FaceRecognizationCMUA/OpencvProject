@@ -35,7 +35,7 @@ import org.opencv.objdetect.CascadeClassifier;
  * @author Sky Xu <Sky Xu at Carnegie Mellon University>
  */
 public class M {
-    private static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amazonaws.com:3306/imagedb";
+    private static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amazonaws.com:3306/opencv";
     private static Connection conn = null;
     private static PreparedStatement pstmt = null;
     private static ResultSet rs = null;
@@ -43,6 +43,8 @@ public class M {
     static String username = "admin";
     static String password = "cmua2014";
     static boolean flag=true;
+    static final int WIDTH=134;
+    static final int HEIGHT=148;
     static{ 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME); 
     }
@@ -74,12 +76,12 @@ public class M {
         cap.release(); // Remember to release the camera
     }
     /**
-     * Call the real-time camera and resize the image to the size of 134*148.
+     * Call the real-time camera and resize the image to the size of WIDTH*HEIGHT.
      * The resized image is stored in the folder "img_resized".
      * @throws Exception 
      */
-    public void realtimeCamera() throws Exception {
-        // Load the native library.  
+    public String realtimeCamera() throws Exception {
+        String destPath="";
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         //or ...     System.loadLibrary("opencv_java244");       
         //make the JFrame
@@ -88,11 +90,10 @@ public class M {
 
         FaceDetector fd= new FaceDetector();
         FacePanel facePanel = new FacePanel();
-        frame.setSize(400, 400); //give the frame some arbitrary size 
+        frame.setSize(400, 400); 
         frame.setBackground(Color.BLUE);
         frame.add(facePanel, BorderLayout.CENTER);
         frame.setVisible(true);
-
         //Open and Read from the video stream  
         Mat webcam_image = new Mat();
         VideoCapture webCam = new VideoCapture(0);
@@ -112,8 +113,10 @@ public class M {
                     MatOfByte mb = new MatOfByte();
                     Highgui.imencode(".jpg", temp, mb);
                     BufferedImage image = ImageIO.read(new ByteArrayInputStream(mb.toArray()));
-                    File file = new File("build\\classes\\cam_img\\test.jpg");
+                    destPath="build\\classes\\cam_img\\capture.jpg";
+                    File file = new File(destPath);
                     ImageIO.write(image, "JPEG", file);
+                    
                 } else {
                     System.out.println(" --(!) No captured frame from webcam !");
                     break;
@@ -121,44 +124,54 @@ public class M {
             }
         }
         webCam.release(); //release the webcam
-//---------- resize the image -------------
+        String imgPath=resize(destPath);
+        return imgPath;
+    }
+    /**
+     * Resize the certain image to required size (WIDTH*HEIGHT).
+     * @param imgPath the path of the image.
+     * @return the path of the resized image.
+     * @throws Exception 
+     */
+    public static String resize(String imgPath)throws Exception{
         System.out.println("\nRunning DetectFaceDemo");
         String xmlfilePath = FaceDetector.class.getResource("haarcascade_frontalface_alt.xml").getPath().substring(1);
         System.out.println(xmlfilePath);//test
         CascadeClassifier faceDetector = new CascadeClassifier(xmlfilePath);
-        String imgPath=FaceDetector.class.getResource("cam_img/test.jpg").getPath().substring(1);
+//        String imgPath=FaceDetector.class.getResource("cam_img/test.jpg").getPath().substring(1);
         Mat image = Highgui.imread(imgPath);
         System.out.println(imgPath);
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(image, faceDetections);
         System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
+        int count=1;
+        String dir="";
         for (Rect rect : faceDetections.toArray()) {
             ImageFilter cropFilter = new CropImageFilter(rect.x, rect.y, rect.width, rect.height);
             BufferedImage tag = new BufferedImage(rect.width, rect.height, BufferedImage.TYPE_INT_RGB);
-            File file = new File("cam_img\\test.jpg");
+//            File file = new File("build\\classes\\cam_img\\test.jpg");
+            File file = new File(imgPath);
             BufferedImage src = ImageIO.read(file);
             Image img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(src.getSource(), cropFilter));
-            BufferedImage output = new BufferedImage(134,148, BufferedImage.TYPE_INT_RGB);
+            BufferedImage output = new BufferedImage (WIDTH,HEIGHT, BufferedImage.TYPE_INT_RGB);
             Graphics g = output.getGraphics();
-            g.drawImage(img, 0, 0,134,148,null);
+            g.drawImage(img, 0, 0,WIDTH,HEIGHT,null);
             g.dispose();
-            String dir = "img_resized\\cut_image.jpg";
+            dir = "img_resized\\cut_image.jpg";
+//            String dir = "trainset\\57-tx\\57-"+(count++)+".jpg";
             File dest = new File(dir);
             ImageIO.write(output, "JPEG", dest);
         }
-    }
-    /**
-     * Recognize the image and match it with the photos in the library.
-     * @return the label;
-     */
-    public static int recognize(){
-        return OpenCVFaceRecognizer.FaceRecognizer();
+        return dir;
     }
     public static void main(String[] args) throws Exception{
+        int sno;
 //        connect();
+         OpenCVFaceRecognizer.train("trainsetcombined");
+//        OpenCVFaceRecognizer.train("trainset\\57-tx");
+//        OpenCVFaceRecognizer.train("trainset\\18-guangyaox");
         M main=new M();
-        main.realtimeCamera();
-        recognize();
+        sno=OpenCVFaceRecognizer.recognize(main.realtimeCamera());
         
     }
 }
