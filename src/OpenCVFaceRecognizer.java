@@ -100,7 +100,7 @@ public class OpenCVFaceRecognizer {
         for (File image : imageFiles) {
             M.resize(image.getPath());
             Mat img = imread(image.getAbsolutePath(), CV_LOAD_IMAGE_GRAYSCALE);
-            System.out.println(image.getName());//test
+//            System.out.println(image.getName());//test
             int label = Integer.parseInt(image.getName().split("\\-")[0]);
             images.put(counter, img);
             labelsBuf.put(counter, label);

@@ -167,7 +167,7 @@ public class M {
     public static void main(String[] args) throws Exception{
         int sno;
 //        connect();
-         OpenCVFaceRecognizer.train("trainsetcombined");
+         OpenCVFaceRecognizer.train("photodb2");
 //        OpenCVFaceRecognizer.train("trainset\\57-tx");
 //        OpenCVFaceRecognizer.train("trainset\\18-guangyaox");
         M main=new M();
