@@ -32,49 +32,97 @@ import static org.bytedeco.javacpp.opencv_highgui.*;
  * @author Samuel Audet
  */
 public class OpenCVFaceRecognizer {
+    public static FaceRecognizer faceRecognizer = createLBPHFaceRecognizer();
     public static int FaceRecognizer() {
-        String trainingDir = "testphotodb";
+        
         Mat testImage = imread("img_resized\\cut_image.jpg", CV_LOAD_IMAGE_GRAYSCALE);//test
+//        String trainingDir = "photodb";
+//        File root = new File(trainingDir);
+//
+//        FilenameFilter imgFilter = (File dir, String name) -> {
+//            name = name.toLowerCase();
+//            return name.endsWith(".jpg") || name.endsWith(".pgm") || name.endsWith(".png");
+//        };
+//
+//        File[] imageFiles = root.listFiles(imgFilter);// files in the training folder
+//
+//        MatVector images = new MatVector(imageFiles.length);
+//
+//        Mat labels = new Mat(imageFiles.length, 1, CV_32SC1);
+//        IntBuffer labelsBuf = labels.getIntBuffer();
+//
+//        int counter = 0;
+//
+//        for (File image : imageFiles) {
+//            Mat img = imread(image.getAbsolutePath(), CV_LOAD_IMAGE_GRAYSCALE);
+//
+//            int label = Integer.parseInt(image.getName().split("\\-")[0]);
+//
+//            images.put(counter, img);
+//
+//            labelsBuf.put(counter, label);
+//
+//            counter++;
+//        }
 
+//        FaceRecognizer faceRecognizer = createFisherFaceRecognizer();
+//        // FaceRecognizer faceRecognizer = createEigenFaceRecognizer();
+         FaceRecognizer faceRecognizer = createLBPHFaceRecognizer();
+////
+//        faceRecognizer.train(images, labels);
+
+        int predictedLabel = faceRecognizer.predict(testImage);
+
+<<<<<<< HEAD
+=======
+        System.out.println("Predicted label: " + predictedLabel);
+        return predictedLabel;
+    }
+    public static int recognize(String imgPath){
+        Mat testImage = imread("img_resized\\cut_image.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+//        FaceRecognizer faceRecognizer = createLBPHFaceRecognizer();
+        int predictedLabel = faceRecognizer.predict(testImage);
+        int[] ints = new int[1];
+        double[] pconfidence = new double[1];
+        faceRecognizer.predict(testImage, ints, pconfidence);
+//        System.out.println(faceRecognizer.predict(testImage));
+        System.out.println(pconfidence[0]);
+        System.out.println("Predicted label: " + predictedLabel);
+        return predictedLabel;
+    }
+    
+    public static void train(String trainingDir) throws Exception{
         File root = new File(trainingDir);
-
+>>>>>>> 63893faca6b62b9969a98225dae641cd135d12c3
         FilenameFilter imgFilter = new FilenameFilter() {
             public boolean accept(File dir, String name) {
                 name = name.toLowerCase();
                 return name.endsWith(".jpg") || name.endsWith(".pgm") || name.endsWith(".png");
+<<<<<<< HEAD
             }
+=======
+>>>>>>> 63893faca6b62b9969a98225dae641cd135d12c3
         };
-
-        File[] imageFiles = root.listFiles(imgFilter);
-
+        };
+        File[] imageFiles = root.listFiles(imgFilter);// files in the training folder
         MatVector images = new MatVector(imageFiles.length);
-
         Mat labels = new Mat(imageFiles.length, 1, CV_32SC1);
         IntBuffer labelsBuf = labels.getIntBuffer();
-
         int counter = 0;
-
         for (File image : imageFiles) {
+//            M.resize(image.getPath());
             Mat img = imread(image.getAbsolutePath(), CV_LOAD_IMAGE_GRAYSCALE);
-
+//            System.out.println(image.getName());//test
             int label = Integer.parseInt(image.getName().split("\\-")[0]);
-
             images.put(counter, img);
-
             labelsBuf.put(counter, label);
-
             counter++;
         }
-
-        FaceRecognizer faceRecognizer = createFisherFaceRecognizer();
+//        FaceRecognizer faceRecognizer = createFisherFaceRecognizer();
         // FaceRecognizer faceRecognizer = createEigenFaceRecognizer();
-        // FaceRecognizer faceRecognizer = createLBPHFaceRecognizer()
-
+//         FaceRecognizer faceRecognizer = createLBPHFaceRecognizer();
         faceRecognizer.train(images, labels);
-
-        int predictedLabel = faceRecognizer.predict(testImage);
-
-        System.out.println("Predicted label: " + predictedLabel);
-        return predictedLabel;
-    }
+  
 }
+}
+
