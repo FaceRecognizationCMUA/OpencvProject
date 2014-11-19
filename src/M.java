@@ -33,11 +33,7 @@ import org.opencv.objdetect.CascadeClassifier;
  * @author Sky Xu <Sky Xu at Carnegie Mellon University>
  */
 public class M {
-    private static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amazonaws.com:3306/opencv";
-    private static String sql="";
-    private static Connection conn = null;
-    private static PreparedStatement pstmt = null;
-    private static ResultSet rs = null;
+    
     private File file = null;
     static String username = "admin";
     static String password = "cmua2014";
@@ -49,37 +45,20 @@ public class M {
     }
     public static void connectDB(){
         try {
-            conn = DriverManager.getConnection(URL, username, password);
+            DB.conn = DriverManager.getConnection(DB.URL, DB.username, DB.password);
             System.out.println("Connected!");
         }
         catch(SQLException se){
             System.out.println(se);
         }
     }
-    public static void nonRealtimeCamera() throws Exception{
-        System.out.println("Hello, OpenCV");//test
-        Mat frame = new Mat();
-        VideoCapture cap = new VideoCapture(0);                     
-        Thread.sleep(500);	// 0.5 sec of a delay. This is not obvious but its necessary as the camera simply needs time to initialize itself
-        if(!cap.isOpened()){
-            System.out.println("Did not connect to camera");
-        }
-        else 
-            System.out.println("found webcam: "+ cap.toString());
-        cap.retrieve(frame);// The current frame in the camera is saved in "frame"
-        System.out.println("Captured image with "+ frame.width()+ " pixels wide by "         		  										+ frame.height() + " pixels tall.");
-        Highgui.imwrite("cam_img\\me1.jpg", frame);
-        Mat frameBlur = new Mat();
-        Imgproc.blur(frame, frameBlur, new Size(5,5) );
-        Highgui.imwrite("me2-blurred.jpg", frameBlur);
-        cap.release(); // Remember to release the camera
-    }
+    
     /**
      * Call the real-time camera and resize the image to the size of WIDTH*HEIGHT.
      * The resized image is stored in the folder "img_resized".
      * @throws Exception 
      */
-    public String realtimeCamera() throws Exception {
+    public static String realtimeCamera() throws Exception {
         String destPath="";
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         //or ...     System.loadLibrary("opencv_java244");       
@@ -190,7 +169,7 @@ public class M {
     }
     static void initDB(){
         
-        sql="insert into student values";
+        DB.sql="insert into student values";
     }
         
     
