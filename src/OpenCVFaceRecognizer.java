@@ -90,16 +90,12 @@ public class OpenCVFaceRecognizer {
     }
     
     public static void train(String trainingDir) throws Exception{
-//        FaceRecognizer faceRecognizer = createLBPHFaceRecognizer();
         File root = new File(trainingDir);
-//        FilenameFilter imgFilter = (File dir, String name) -> {
-//            name = name.toLowerCase();
-//            return name.endsWith(".jpg") || name.endsWith(".pgm") || name.endsWith(".png");
-//        };
         FilenameFilter imgFilter = new FilenameFilter() {
             public boolean accept(File dir, String name) {
                 name = name.toLowerCase();
                 return name.endsWith(".jpg") || name.endsWith(".pgm") || name.endsWith(".png");
+        };
         };
         File[] imageFiles = root.listFiles(imgFilter);// files in the training folder
         MatVector images = new MatVector(imageFiles.length);
@@ -119,5 +115,7 @@ public class OpenCVFaceRecognizer {
         // FaceRecognizer faceRecognizer = createEigenFaceRecognizer();
 //         FaceRecognizer faceRecognizer = createLBPHFaceRecognizer();
         faceRecognizer.train(images, labels);
-    }
+  
 }
+}
+
