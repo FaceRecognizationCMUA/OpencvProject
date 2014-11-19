@@ -47,7 +47,7 @@ public class M {
     static{ 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME); 
     }
-    public static void connect(){
+    public static void connectDB(){
         try {
             conn = DriverManager.getConnection(URL, username, password);
             System.out.println("Connected!");
@@ -197,11 +197,11 @@ public class M {
     public static void main(String[] args) throws Exception{
         M main=new M();
         int sno;
-        System.out.println(findLabel("photodb","hongl"));
+//        System.out.println(findLabel("photodb","hongl"));
 //        Window w=new Window();
 //        w.setVisible(true);
-//        connect();
-//         OpenCVFaceRecognizer.train("photodb_resized");
-//        sno=OpenCVFaceRecognizer.recognize(main.realtimeCamera());  
+//        connectDB();
+         OpenCVFaceRecognizer.train("photodb_resized");
+        sno=OpenCVFaceRecognizer.recognize(main.realtimeCamera());  
     }
 }
