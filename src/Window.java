@@ -288,7 +288,7 @@ public class Window extends javax.swing.JFrame {
         jLabel13.setText("Remark");
 
         jComboBox1.setFont(new java.awt.Font("宋体", 0, 24)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Name Card", "Paper", "Nereshnee", "Letter", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "stapler", "tuition fees", "complaints", "collect assignments", "meet people", "other", " " }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -297,6 +297,12 @@ public class Window extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("宋体", 1, 24)); // NOI18N
         jLabel14.setText("Reason");
+
+        disp_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disp_nameActionPerformed(evt);
+            }
+        });
 
         disp_confirmBtn.setFont(new java.awt.Font("宋体", 1, 36)); // NOI18N
         disp_confirmBtn.setText("Confirm");
@@ -539,8 +545,14 @@ public class Window extends javax.swing.JFrame {
 
     private void shootBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootBtnActionPerformed
         // TODO add your handling code here:
+        String[] result;
         try{
-            M.realtimeCamera();
+//            M.realtimeCamera();
+            String imgpath=M.realtimeCamera();//bug here
+            int label=OpenCVFaceRecognizer.recognize(imgpath);
+            result=DB.findStudentByLabel(label);
+            disp_name.setText(result[2]);
+            disp_aid.setText(result[1]);
         }
         catch(Exception e){
             System.out.println(e);
@@ -550,6 +562,10 @@ public class Window extends javax.swing.JFrame {
     private void newcomer_prgrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newcomer_prgrmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newcomer_prgrmActionPerformed
+
+    private void disp_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disp_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_disp_nameActionPerformed
 
 
 

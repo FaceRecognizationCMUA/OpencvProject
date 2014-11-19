@@ -43,15 +43,7 @@ public class M {
     static{ 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME); 
     }
-    public static void connectDB(){
-        try {
-            DB.conn = DriverManager.getConnection(DB.URL, DB.username, DB.password);
-            System.out.println("Connected!");
-        }
-        catch(SQLException se){
-            System.out.println(se);
-        }
-    }
+    
     
     /**
      * Call the real-time camera and resize the image to the size of WIDTH*HEIGHT.
@@ -65,13 +57,15 @@ public class M {
         //make the JFrame
         JFrame frame = new JFrame("WebCam Capture - Face detection");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         FaceDetector fd= new FaceDetector();
         FacePanel facePanel = new FacePanel();
-        frame.setSize(400, 400); 
+        
+        frame.setSize(600, 600); 
         frame.setBackground(Color.BLUE);
         frame.add(facePanel, BorderLayout.CENTER);
         frame.setVisible(true);
+        facePanel.setVisible(true);
         //Open and Read from the video stream  
         Mat webcam_image = new Mat();
         VideoCapture webCam = new VideoCapture(0);
@@ -85,9 +79,12 @@ public class M {
                     //Apply the classifier to the captured image  
                     Mat temp = webcam_image;
                     webcam_image = fd.detect(webcam_image);
-                    //Display the image  
+                    //Display the image --------BUG
                     facePanel.matToBufferedImage(webcam_image);
                     facePanel.repaint();
+//                    System.out.println("visibility:"+facePanel.isVisible());//true
+//                    System.out.println("enabled?"+facePanel.isEnabled());//true
+//                    System.out.println("validity"+facePanel.isValid());//true
                     MatOfByte mb = new MatOfByte();
                     Highgui.imencode(".jpg", temp, mb);
                     BufferedImage image = ImageIO.read(new ByteArrayInputStream(mb.toArray()));
@@ -177,10 +174,11 @@ public class M {
         M main=new M();
         int sno;
 //        System.out.println(findLabel("photodb","hongl"));
-//        Window w=new Window();
-//        w.setVisible(true);
-//        connectDB();
-         OpenCVFaceRecognizer.train("photodb_resized");
-        sno=OpenCVFaceRecognizer.recognize(main.realtimeCamera());  
+        Window w=new Window();
+        w.setVisible(true);
+        OpenCVFaceRecognizer.train("photodb_resized");
+//        realtimeCamera();
+        DB.connectDB();
+//        sno=OpenCVFaceRecognizer.recognize(main.realtimeCamera());  
     }
 }
