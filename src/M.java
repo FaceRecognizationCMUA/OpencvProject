@@ -96,6 +96,7 @@ public class M {
         //Open and Read from the video stream  
         Mat webcam_image = new Mat();
         VideoCapture webCam = new VideoCapture(0);
+        System.out.println(flag);
         if (webCam.isOpened()) {
             Thread.sleep(500); /// This one-time delay allows the Webcam to initialize itself  
             while (flag) {
@@ -112,7 +113,7 @@ public class M {
                     MatOfByte mb = new MatOfByte();
                     Highgui.imencode(".jpg", temp, mb);
                     BufferedImage image = ImageIO.read(new ByteArrayInputStream(mb.toArray()));
-                    File file = new File("build\\classes\\cam_img\\test.jpg");
+                    File file = new File("build/classes/cam_img/test.jpg");
                     ImageIO.write(image, "JPEG", file);
                 } else {
                     System.out.println(" --(!) No captured frame from webcam !");
@@ -120,6 +121,7 @@ public class M {
                 }
             }
         }
+        System.out.println(flag);
         webCam.release(); //release the webcam
 //---------- resize the image -------------
         System.out.println("\nRunning DetectFaceDemo");
@@ -159,6 +161,7 @@ public class M {
         M main=new M();
         main.realtimeCamera();
         recognize();
+        
         
     }
 }

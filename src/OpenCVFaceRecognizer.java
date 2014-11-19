@@ -38,9 +38,11 @@ public class OpenCVFaceRecognizer {
 
         File root = new File(trainingDir);
 
-        FilenameFilter imgFilter = (File dir, String name) -> {
-            name = name.toLowerCase();
-            return name.endsWith(".jpg") || name.endsWith(".pgm") || name.endsWith(".png");
+        FilenameFilter imgFilter = new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                name = name.toLowerCase();
+                return name.endsWith(".jpg") || name.endsWith(".pgm") || name.endsWith(".png");
+            }
         };
 
         File[] imageFiles = root.listFiles(imgFilter);
