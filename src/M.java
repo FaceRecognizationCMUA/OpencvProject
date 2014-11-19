@@ -14,6 +14,7 @@ import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.sql.*;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -162,6 +163,31 @@ public class M {
         }
         return dir;
     }
+    /**
+     * Find the label by andrew id.
+     * @param trainDBdir directory of training set.
+     * @param andrewid andrew id of student.
+     * @return the label of student.
+     */
+    public static int  findLabel(String trainDBdir, String andrewid){
+        File DBroot = new File(trainDBdir);
+        FilenameFilter imgFilter = new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                name = name.toLowerCase();
+                return name.endsWith(".jpg") || name.endsWith(".pgm") || name.endsWith(".png");
+            }
+        };
+        File[] imageFiles = DBroot.listFiles(imgFilter);       
+        int label = 0;
+        for (File f : imageFiles) {
+            String aid = f.getName().split("\\-|\\.")[1];
+            //System.out.println(aid);
+            if (aid.equals(andrewid)){
+                label = Integer.parseInt(f.getName().split("\\-")[0]);
+            }   
+        }
+        return label;
+    }
     static void initDB(){
         
         sql="insert into student values";
@@ -171,10 +197,11 @@ public class M {
     public static void main(String[] args) throws Exception{
         M main=new M();
         int sno;
+        System.out.println(findLabel("photodb","hongl"));
 //        Window w=new Window();
 //        w.setVisible(true);
 //        connect();
-         OpenCVFaceRecognizer.train("photodb_resized");
-        sno=OpenCVFaceRecognizer.recognize(main.realtimeCamera());  
+//         OpenCVFaceRecognizer.train("photodb_resized");
+//        sno=OpenCVFaceRecognizer.recognize(main.realtimeCamera());  
     }
 }
