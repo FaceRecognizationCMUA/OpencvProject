@@ -15,10 +15,18 @@ import java.awt.image.ImageFilter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.IntBuffer;
 import java.sql.*;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import org.bytedeco.javacpp.opencv_contrib;
+import static org.bytedeco.javacpp.opencv_contrib.createEigenFaceRecognizer;
+import org.bytedeco.javacpp.opencv_core;
+import static org.bytedeco.javacpp.opencv_core.CV_32SC1;
+import static org.bytedeco.javacpp.opencv_highgui.CV_LOAD_IMAGE_GRAYSCALE;
+import static org.bytedeco.javacpp.opencv_highgui.imread;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -36,6 +44,7 @@ import org.opencv.objdetect.CascadeClassifier;
  */
 public class M {
     private static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amazonaws.com:3306/opencv";
+    private static String sql="";
     private static Connection conn = null;
     private static PreparedStatement pstmt = null;
     private static ResultSet rs = null;
@@ -164,14 +173,19 @@ public class M {
         }
         return dir;
     }
-    public static void main(String[] args) throws Exception{
-        int sno;
-//        connect();
-         OpenCVFaceRecognizer.train("photodb2");
-//        OpenCVFaceRecognizer.train("trainset\\57-tx");
-//        OpenCVFaceRecognizer.train("trainset\\18-guangyaox");
-        M main=new M();
-        sno=OpenCVFaceRecognizer.recognize(main.realtimeCamera());
+    static void initDB(){
         
+        sql="insert into student values";
+    }
+        
+    
+    public static void main(String[] args) throws Exception{
+        M main=new M();
+        int sno;
+        Window w=new Window();
+        w.setVisible(true);
+//        connect();
+         OpenCVFaceRecognizer.train("photodb_resized");
+        sno=OpenCVFaceRecognizer.recognize(main.realtimeCamera());  
     }
 }
