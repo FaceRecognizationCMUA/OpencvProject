@@ -1,5 +1,8 @@
 
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -338,6 +341,11 @@ public class Window extends javax.swing.JFrame {
 
         disp_confirmBtn.setFont(new java.awt.Font("宋体", 1, 36)); // NOI18N
         disp_confirmBtn.setText("Confirm");
+        disp_confirmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disp_confirmBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout displayPanelLayout = new javax.swing.GroupLayout(displayPanel);
         displayPanel.setLayout(displayPanelLayout);
@@ -621,6 +629,11 @@ public class Window extends javax.swing.JFrame {
         disp_aid.setText((String) inforList.get(1));
         disp_visitcount.setText(inforList.get(6).toString());
         disp_lastvisit.setText(inforList.get(5).toString());
+        
+        disp_name.setEnabled(false);
+        disp_aid.setEnabled(false);
+        disp_visitcount.setEnabled(false);
+        disp_lastvisit.setEnabled(false);
 //        disp_remark.setText((String) inforList.get(8));
         
         
@@ -635,8 +648,8 @@ public class Window extends javax.swing.JFrame {
 //        }
 //        System.out.print(reason.getItemCount());
         String path="photodb\\"+label+"-"+disp_aid.getText()+".jpg";
-        System.out.println(path);
-        showpic.setIcon(new javax.swing.ImageIcon("photodb\\"+label+"-"+disp_aid.getText()+".jpg"));
+//        System.out.println(path);//test
+        showpic.setIcon(new javax.swing.ImageIcon(path));
         
     }
     private void disp_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disp_nameActionPerformed
@@ -764,6 +777,20 @@ public class Window extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_train_confirmBtnActionPerformed
+
+    private void disp_confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disp_confirmBtnActionPerformed
+        // TODO add your handling code here:
+//        Calendar c=Calendar.getInstance();
+//        String date=c.get(Calendar.YEAR)+"-"+c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE);
+        Date date = new Date();
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String visitdate = dateformat.format(date);
+        int no=M.findLabel("photodb\\",disp_aid.getText());
+        String visitreason=reason.getSelectedItem().toString();
+//        System.out.println(visitreason);//test
+        String remark=disp_remark.getText();
+        DB.addVisit(visitdate,no,visitreason,remark);
+    }//GEN-LAST:event_disp_confirmBtnActionPerformed
 
 
 

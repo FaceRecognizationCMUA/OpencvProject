@@ -113,7 +113,17 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
         }
         return null;
     }
-
+    public static void addVisit(String visitdate,int no,String visitreason,String remark){
+        DB.sql="insert into visit(event_time,stu_no,reason,remark) values('"+visitdate+"','"+no+"','"+visitreason+"','"+remark+"');";
+        System.out.println(DB.sql);
+        try{
+            DB.stmt.executeUpdate(DB.sql);
+            System.out.println("Insert success!");
+        }
+        catch(SQLException e){
+            System.out.println(e);
+        }
+    }
     public static void addStudent(int stid, String andrewId, String studentName, String program, String gender) throws Exception {
 
         Statement stmt = DBconnect().createStatement();//connect database
@@ -126,6 +136,7 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
         pstmt.setString(5, gender);
 
         int temp = pstmt.executeUpdate();
+        System.out.println("Student added!");
     }
     static String[] findNameByLabel(int label){
         String[] name=new String[2];
@@ -258,4 +269,4 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
 //        }
 //        return result;
 //    }
-//}
+}
