@@ -187,8 +187,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane5" min="-2" pref="550" max="-2" attributes="0"/>
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane5" pref="568" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -229,7 +229,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
                               <Component id="shootBtn" min="-2" pref="108" max="-2" attributes="0"/>
-                              <EmptySpace pref="257" max="32767" attributes="0"/>
+                              <EmptySpace pref="275" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -541,7 +541,7 @@
                                   <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jComboBox1" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="153" max="32767" attributes="0"/>
+                              <EmptySpace pref="166" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -931,7 +931,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
                               <Component id="train_confirmBtn" min="-2" pref="77" max="-2" attributes="0"/>
-                              <EmptySpace pref="158" max="32767" attributes="0"/>
+                              <EmptySpace pref="173" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>

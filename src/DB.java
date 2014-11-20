@@ -18,16 +18,17 @@ import java.util.Vector;
  *
  * @author Eason Lu
  */
-public class DB1 {
+public class DB {
 
-    static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amazonaws.com:3306/opencv";
-    static String sql = "";
+static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amazonaws.com:3306/opencv";
+    static String sql="";
     static Connection conn = null;
+    static Statement stmt=null;
     static PreparedStatement pstmt = null;
     static ResultSet rs = null;
+    static ResultSetMetaData rsmd=null;
     static String username = "admin";
     static String password = "cmua2014";
-
     public static Connection DBconect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");//get the driver

@@ -509,6 +509,11 @@ public class Window1 extends javax.swing.JFrame {
         report_fromY2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2013", "2012", "2011", "2010" }));
 
         report_toY3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2013", "2012", "2011", "2010" }));
+        report_toY3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                report_toY3ActionPerformed(evt);
+            }
+        });
 
         jLabel26.setFont(new java.awt.Font("宋体", 1, 36)); // NOI18N
         jLabel26.setText("From");
@@ -761,11 +766,11 @@ public class Window1 extends javax.swing.JFrame {
             String imgpath=M.realtimeCamera();//bug here
             
             int label=OpenCVFaceRecognizer.recognize(imgpath);
-            result_stu=DB0.findStudentByLabel(label);
-            result_visit=DB0.findEventByLabel(label);
+            result_stu=DB_deprecated.findStudentByLabel(label);
+            result_visit=DB_deprecated.findEventByLabel(label);
             disp_name.setText(result_stu[2]);
             disp_aid.setText(result_visit[1]);
-            disp_visitcount.setText(DB0.calcVisitTimeByLabel(label)+"");
+            disp_visitcount.setText(DB_deprecated.calcVisitTimeByLabel(label)+"");
             
         }
         catch(Exception e){
@@ -781,7 +786,7 @@ public class Window1 extends javax.swing.JFrame {
         String prgrm = newcomer_prgrm.getText();
         String gender = newcomer_gender.getSelectedItem().toString();
         try {
-            DB0.addStudent(stid, name, aid, prgrm, gender);
+            DB_deprecated.addStudent(stid, name, aid, prgrm, gender);
         } catch (Exception e) {
             System.out.print(e.getMessage());
         } finally {
@@ -812,13 +817,13 @@ public class Window1 extends javax.swing.JFrame {
             titleVector.add("reason");
             titleVector.add("remark");
             titleVector.add("event_time");
-            resultArray = DB0.selectStudentReason(date1, date2);
+            resultArray = DB_deprecated.selectStudentReason(date1, date2);
         } else {
             titleVector.add("event_time");
             titleVector.add("gender");
             titleVector.add("reason");
             titleVector.add("frequency");
-            resultArray = DB0.selectFrequency(date1, date2);
+            resultArray = DB_deprecated.selectFrequency(date1, date2);
         }
         DefaultTableModel tableModel = new DefaultTableModel(resultArray, titleVector);//make the model for the display table with colum title and content
         displayTable.setModel(tableModel);//show the model
@@ -836,7 +841,7 @@ public class Window1 extends javax.swing.JFrame {
         String prgrm = newcomer_prgrm.getText();
         String gender = newcomer_gender.getSelectedItem().toString();
         try {
-            DB0.addStudent(stid, name, aid, prgrm, gender);
+            DB_deprecated.addStudent(stid, name, aid, prgrm, gender);
         } catch (Exception e) {
             System.out.print(e.getMessage());
         } finally {
@@ -846,7 +851,7 @@ public class Window1 extends javax.swing.JFrame {
 
     private void disp_confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disp_confirmBtnActionPerformed
         // TODO add your handling code here:
-        ArrayList inforList = DB0.selectInformation(57);
+        ArrayList inforList = DB_deprecated.selectInformation(57);
         disp_name.setText((String) inforList.get(2));
         disp_aid.setText((String) inforList.get(1));
         disp_visitcount.setText((String) inforList.get(6));
@@ -862,6 +867,10 @@ public class Window1 extends javax.swing.JFrame {
 
         jLabel18.setIcon(new javax.swing.ImageIcon("D:\\java\\OpencvProject_last\\OpencvProject\\photodb_resized\\1-acrall.jpg"));
     }//GEN-LAST:event_disp_confirmBtnActionPerformed
+
+    private void report_toY3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_toY3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_report_toY3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
