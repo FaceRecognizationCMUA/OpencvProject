@@ -1022,6 +1022,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Confirm"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="train_confirmBtnActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

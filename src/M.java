@@ -17,6 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import org.opencv.core.Core;
@@ -117,9 +118,42 @@ public class M {
         }
         webCam.release(); //release the webcam
         String imgPath = resize(destPath);
-        flag=true;
+        flag = true;
         frame.dispose();
         return imgPath;
+    }
+
+    public static int createLabelInput(String andrewid) {
+        File DBroot = new File("photodb_resized/");
+        FilenameFilter imgFilter = new FilenameFilter() {
+
+            public boolean accept(File dir, String name) {
+                name = name.toLowerCase();
+                return name.endsWith(".jpg") || name.endsWith(".pgm") || name.endsWith(".png");
+            }
+        };
+        File[] imageFiles = DBroot.listFiles(imgFilter);
+
+        int i = 0;
+        ArrayList<Integer> labelList = new ArrayList<>();
+        for (File f : imageFiles) {
+            String aid = f.getName().split("\\.|\\-")[1];
+
+            if (aid.split("\\d+")[0].equals(andrewid) && aid.equals(andrewid) == false) {
+                int d = Integer.parseInt(aid.split("\\D+")[1]);
+                labelList.add(d);
+                //System.out.println(d);
+            }
+        }
+        if (!labelList.isEmpty()) {
+            i = labelList.get(labelList.size() - 1);
+            System.out.println("max label is " + i);
+            System.out.println("new label is " + (i + 1));
+            return i + 1;
+        } else {
+            return i + 1;
+        }
+
     }
 
     /**
@@ -154,6 +188,39 @@ public class M {
             g.drawImage(img, 0, 0, WIDTH, HEIGHT, null);
             g.dispose();
             dir = "img_resized\\cut_image.jpg";
+//            String dir = "trainset\\57-tx\\57-"+(count++)+".jpg";
+            File dest = new File(dir);
+            ImageIO.write(output, "JPEG", dest);
+        }
+        return dir;
+    }
+
+    public static String resize(String imgPath, String andrewId, int trainImageCount) throws Exception {
+        System.out.println("\nRunning DetectFaceDemo");
+        String xmlfilePath = FaceDetector.class.getResource("haarcascade_frontalface_alt.xml").getPath().substring(1);
+        System.out.println(xmlfilePath);//test
+        CascadeClassifier faceDetector = new CascadeClassifier(xmlfilePath);
+//        String imgPath=FaceDetector.class.getResource("cam_img/test.jpg").getPath().substring(1);
+        Mat image = Highgui.imread(imgPath);
+        System.out.println(imgPath);
+        MatOfRect faceDetections = new MatOfRect();
+        faceDetector.detectMultiScale(image, faceDetections);
+        System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
+        int count = 1;
+        String dir = "";
+        for (Rect rect : faceDetections.toArray()) {
+            ImageFilter cropFilter = new CropImageFilter(rect.x, rect.y, rect.width, rect.height);
+            BufferedImage tag = new BufferedImage(rect.width, rect.height, BufferedImage.TYPE_INT_RGB);
+//            File file = new File("build\\classes\\cam_img\\test.jpg");
+            File file = new File(imgPath);
+            BufferedImage src = ImageIO.read(file);
+            Image img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(src.getSource(), cropFilter));
+            BufferedImage output = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+            Graphics g = output.getGraphics();
+            g.drawImage(img, 0, 0, WIDTH, HEIGHT, null);
+            g.dispose();
+            int st_no = findLabel("photodb_resized\\", andrewId);
+            dir = "photodb_resized\\" + st_no + "-" + andrewId + trainImageCount + ".jpg";
 //            String dir = "trainset\\57-tx\\57-"+(count++)+".jpg";
             File dest = new File(dir);
             ImageIO.write(output, "JPEG", dest);
@@ -201,14 +268,16 @@ public class M {
 //        facePanel.setEnabled(true);
 //        facePanel.setVisible(false);
     }
-/**
- * This method receives parameter of andrew ID. It checks if this aID exist or not.
- * If not, create a label by finding the biggest stu_no in database.
- * @author Guangyao Xie
- * @param andrewid 
- * @return a label number for a new comer
- * @throws Exception 
- */
+
+    /**
+     * This method receives parameter of andrew ID. It checks if this aID exist
+     * or not. If not, create a label by finding the biggest stu_no in database.
+     *
+     * @author Guangyao Xie
+     * @param andrewid
+     * @return a label number for a new comer
+     * @throws Exception
+     */
     public static int createNewLabel(String andrewid) throws Exception {
 
         try {
@@ -253,23 +322,25 @@ public class M {
         }
 
     }
-/**
- * This method executes insert query to the db
- * @author Guangyao Xie
- * @param label
- * @param name
- * @param andrewid
- * @param program
- * @param gender
- * @throws Exception 
- */
+
+    /**
+     * This method executes insert query to the db
+     *
+     * @author Guangyao Xie
+     * @param label
+     * @param name
+     * @param andrewid
+     * @param program
+     * @param gender
+     * @throws Exception
+     */
     public static void writeNewComerInfo(int label, String name, String andrewid,
             String program, String gender) throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         DB.sql = String.format("INSERT INTO opencv.student (stu_no, andrew_id, stu_name, program, gender)"
                 + "VALUES (%d, '%s', '%s', '%s', '%s');", label, name, andrewid, program, gender);
 
-        DB.stmt= DB.conn.createStatement();
+        DB.stmt = DB.conn.createStatement();
         DB.stmt.execute(DB.sql);
         DB.conn.close();
         System.out.println("Write in DB");
@@ -280,10 +351,10 @@ public class M {
         int sno;
 //        init();
 //        System.out.println(findLabel("photodb","hongl"));
-        Window w=new Window();
+        Window w = new Window();
         System.out.println("MAIN: " + Thread.currentThread());
         new Window().setVisible(true);
-        
+
         OpenCVFaceRecognizer.train("photodb_resized");
 //        realtimeCamera();
 //        DB.connectDB();

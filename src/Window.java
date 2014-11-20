@@ -522,6 +522,11 @@ public class Window extends javax.swing.JFrame {
 
         train_confirmBtn.setFont(new java.awt.Font("宋体", 1, 24)); // NOI18N
         train_confirmBtn.setText("Confirm");
+        train_confirmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                train_confirmBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout trainPanelLayout = new javax.swing.GroupLayout(trainPanel);
         trainPanel.setLayout(trainPanelLayout);
@@ -623,13 +628,16 @@ public class Window extends javax.swing.JFrame {
 //        disp_name.setText(result[2]);
 //        disp_aid.setText(result[1]);
 //        disp_visitcount.setText(result[]);
-        for (int i = 0; i < reason.getItemCount(); i++) {
-            if (reason.getItemAt(i).toString().equals((String) inforList.get(7))) {
-                reason.setSelectedIndex(i);
-            }
-        }
-        System.out.print(reason.getItemCount());
-        showpic.setIcon(new javax.swing.ImageIcon("\\photodb\\"+label+"-"+disp_aid.getText()+".jpg"));
+//        for (int i = 0; i < reason.getItemCount(); i++) {
+//            if (reason.getItemAt(i).toString().equals((String) inforList.get(7))) {
+//                reason.setSelectedIndex(i);
+//            }
+//        }
+//        System.out.print(reason.getItemCount());
+        String path="photodb\\"+label+"-"+disp_aid.getText()+".jpg";
+        System.out.println(path);
+        showpic.setIcon(new javax.swing.ImageIcon("photodb\\"+label+"-"+disp_aid.getText()+".jpg"));
+        
     }
     private void disp_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disp_nameActionPerformed
         // TODO add your handling code here:
@@ -649,7 +657,7 @@ public class Window extends javax.swing.JFrame {
                 int result_visit;
                 public void run() {
                     try {
-                        String imgpath=M.realtimeCamera();//bug here
+                        String imgpath=M.realtimeCamera();//call camera
                         int label=OpenCVFaceRecognizer.recognize(imgpath);
                         
                         RemindJFrame r=new RemindJFrame();
@@ -657,7 +665,7 @@ public class Window extends javax.swing.JFrame {
                         r.setVisible(true);
                         
 //                        DB.DBconnect();
-                        showicon(label);
+//                        showicon(label);
 //                        result_stu=DB.findStudentByLabel(label);
 //                        result_visit=DB.findLastVisitTimeByLabel(label);
 //                        disp_name.setText(result_stu[2]);
@@ -691,11 +699,11 @@ public class Window extends javax.swing.JFrame {
         // TODO add your handling code here:
         int stid = Integer.valueOf(newcomer_no.getText());
         String name = newcomer_name.getText();
-        String aid = newcomer_no.getText();
+        String aid = newcomer_aid.getText();
         String prgrm = newcomer_prgrm.getText();
-        String gender = newcomer_gender.getSelectedItem().toString();
+        String gender =newcomer_gender.getSelectedItem().toString().substring(0, 1);
         try {
-            DB.addStudent(stid, name, aid, prgrm, gender);
+            DB.addStudent(stid, aid, name, prgrm, gender);
         } catch (Exception e) {
             System.out.print(e.getMessage());
         } finally {
@@ -733,6 +741,29 @@ public class Window extends javax.swing.JFrame {
         DefaultTableModel tableModel = new DefaultTableModel(resultArray, titleVector);//make the model for the display table with colum title and content
         displayTable.setModel(tableModel);//show the model
     }//GEN-LAST:event_report_confirmBtnActionPerformed
+
+    private void train_confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_train_confirmBtnActionPerformed
+
+        try {
+            System.out.println("WINDOW: " + Thread.currentThread());
+            Thread t = new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        String imgpath = M.realtimeCamera();//bug here
+                        String aid = train_aid.getText();
+                        int trainNumber = M.createLabelInput(aid);
+                        M.resize(imgpath, train_aid.getText(), trainNumber);
+                    } catch (Exception ex) {
+                        Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            t.start();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }//GEN-LAST:event_train_confirmBtnActionPerformed
 
 
 

@@ -83,7 +83,8 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
     public static Vector<Vector> selectFrequency(String date1, String date2) {
         try {
             Statement stmt = DBconnect().createStatement();//connect database
-            pstmt = conn.prepareStatement("select event_time, gender,reason, count(*) as frequency from student,visit where student.stu_no=visit.stu_no and event_time between ? and ? group by reason,gender");
+            sql="select gender,reason, count(*) as frequency from student,visit where student.stu_no=visit.stu_no and event_time between ? and ?  group by gender,reason;";
+            pstmt=conn.prepareStatement(sql);
             pstmt.setString(1, date1);
             pstmt.setString(2, date2);
             rs = pstmt.executeQuery();
@@ -126,7 +127,23 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
 
         int temp = pstmt.executeUpdate();
     }
-
+    static String[] findNameByLabel(int label){
+        String[] name=new String[2];
+        try{
+            stmt = DBconnect().createStatement();//connect database
+            sql="select stu_name,andrew_id from student where stu_no='"+label+"';";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            rs.first();
+            
+            name[0]=rs.getString(1);
+            name[1]=rs.getString(2);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return name;
+    }
     public static ArrayList selectInformation(int stid) {//返回第三问需要的所有信息
         ArrayList informationList = new ArrayList();
         try {

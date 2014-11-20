@@ -22,8 +22,10 @@ public void setLabel(Window w,int label)
 //    M.findLabel("photodb_resized\\",stid);
     this.label=label;
     this.w=w;
-    String adr="photodb_resized\\57-tx.jpg";
-    piclb.setIcon(new javax.swing.ImageIcon(adr));
+    String[] id=DB.findNameByLabel(label);
+    String adr="photodb_resized\\"+label+"-"+id[1]+".jpg";
+    piclabel.setIcon(new javax.swing.ImageIcon(adr));
+    namelabel.setText("Are you: "+id[0]+"?");
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +39,8 @@ public void setLabel(Window w,int label)
         yesBtn = new javax.swing.JButton();
         noBtn = new javax.swing.JButton();
         newBtn = new javax.swing.JButton();
-        piclb = new javax.swing.JLabel();
+        piclabel = new javax.swing.JLabel();
+        namelabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,31 +69,37 @@ public void setLabel(Window w,int label)
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addComponent(yesBtn)
-                .addGap(49, 49, 49)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(piclb)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(noBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addGap(37, 37, 37)
                         .addComponent(newBtn)
-                        .addGap(36, 36, 36))))
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(piclabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(namelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
-                .addComponent(piclb)
-                .addGap(65, 65, 65)
+                .addContainerGap()
+                .addComponent(piclabel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(namelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(yesBtn)
+                    .addComponent(newBtn)
                     .addComponent(noBtn)
-                    .addComponent(newBtn))
-                .addGap(101, 101, 101))
+                    .addComponent(yesBtn))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -152,9 +161,10 @@ public void setLabel(Window w,int label)
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel namelabel;
     private javax.swing.JButton newBtn;
     private javax.swing.JButton noBtn;
-    private javax.swing.JLabel piclb;
+    private javax.swing.JLabel piclabel;
     private javax.swing.JButton yesBtn;
     // End of variables declaration//GEN-END:variables
 }
