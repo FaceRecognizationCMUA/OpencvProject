@@ -228,17 +228,17 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
         }
         return result;
     }
-    static int findLastVisitTimeByLabel(int n){
-        int result;
-        try{
-            sql="select max(event_time) from visit where stu_no='"+n+"';";
-            rs=stmt.executeQuery(sql);
-            rsmd=rs.getMetaData();
-            result=rs.getDate(1);
-        }
-        catch(SQLException e){
-            System.out.println(e);
-        }
-        return result;
-    }
-}
+//    static int findLastVisitTimeByLabel(int n){
+//        int result;
+//        try{
+//            sql="select max(event_time) from visit where stu_no='"+n+"';";
+//            rs=stmt.executeQuery(sql);
+//            rsmd=rs.getMetaData();
+//            result=rs.getDate(1);
+//        }
+//        catch(SQLException e){
+//            System.out.println(e);
+//        }
+//        return result;
+//    }
+//}
