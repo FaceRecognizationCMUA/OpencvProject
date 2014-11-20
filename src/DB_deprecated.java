@@ -11,7 +11,7 @@ import java.sql.*;
  *
  * @author Sky Xu <Sky Xu at Carnegie Mellon University>
  */
-public class DB0 {
+public class DB_deprecated {
     static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amazonaws.com:3306/opencv";
     static String sql="";
     static Connection conn = null;
@@ -24,7 +24,7 @@ public class DB0 {
     
     static void connectDB(){
         try {
-            conn = DriverManager.getConnection(DB0.URL, DB0.username, DB0.password);
+            conn = DriverManager.getConnection(DB_deprecated.URL, DB_deprecated.username, DB_deprecated.password);
             stmt=conn.createStatement();
             System.out.println("Connected!");
         }

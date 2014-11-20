@@ -166,7 +166,7 @@ public class Window extends javax.swing.JFrame {
             .addGroup(detectPanelLayout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addComponent(shootBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Detect", detectPanel);
@@ -382,7 +382,7 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Display", displayPanel);
@@ -494,7 +494,7 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(train_aid))
                 .addGap(117, 117, 117)
                 .addComponent(train_confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Train", trainPanel);
@@ -512,8 +512,8 @@ public class Window extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 568, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -574,12 +574,12 @@ public class Window extends javax.swing.JFrame {
                     try {
                         String imgpath=M.realtimeCamera();//bug here
                         int label=OpenCVFaceRecognizer.recognize(imgpath);
-                        DB0.connectDB();
-                        result_stu=DB0.findStudentByLabel(label);
-                        result_visit=DB0.findEventByLabel(label);
+                        DB_deprecated.connectDB();
+                        result_stu=DB_deprecated.findStudentByLabel(label);
+                        result_visit=DB_deprecated.findEventByLabel(label);
                         disp_name.setText(result_stu[2]);
                         disp_aid.setText(result_visit[1]);
-                        disp_visitcount.setText(DB0.calcVisitTimeByLabel(label)+"");
+                        disp_visitcount.setText(DB_deprecated.calcVisitTimeByLabel(label)+"");
                     } catch (Exception ex) {
                         Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -589,11 +589,11 @@ public class Window extends javax.swing.JFrame {
             
             
 //            int label=OpenCVFaceRecognizer.recognize("imgpath");
-//            result_stu=DB0.findStudentByLabel(label);
-//            result_visit=DB0.findEventByLabel(label);
+//            result_stu=DB_deprecated.findStudentByLabel(label);
+//            result_visit=DB_deprecated.findEventByLabel(label);
 //            disp_name.setText(result_stu[2]);
 //            disp_aid.setText(result_visit[1]);
-//            disp_visitcount.setText(DB0.calcVisitTimeByLabel(label)+"");
+//            disp_visitcount.setText(DB_deprecated.calcVisitTimeByLabel(label)+"");
             
         }
         catch(Exception e){
@@ -609,7 +609,7 @@ public class Window extends javax.swing.JFrame {
         String prgrm = newcomer_prgrm.getText();
         String gender = newcomer_gender.getSelectedItem().toString();
         try {
-            DB0.addStudent(stid, name, aid, prgrm, gender);
+            DB_deprecated.addStudent(stid, name, aid, prgrm, gender);
         } catch (Exception e) {
             System.out.print(e.getMessage());
         } finally {
