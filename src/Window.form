@@ -278,28 +278,30 @@
                                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                       <Component id="jLabel15" min="-2" pref="139" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="jLabel17" min="-2" pref="209" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="newcomer_aid" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
+                                          <Component id="newcomer_reason" min="-2" max="-2" attributes="0"/>
+                                          <Component id="newcomer_prgrm" min="-2" pref="149" max="-2" attributes="0"/>
+                                          <Component id="newcomer_no" min="-2" pref="149" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="addNewComerBtn" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="newcomer_name" min="-2" pref="149" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                                               <Component id="newcomer_gender" min="-2" pref="113" max="-2" attributes="0"/>
                                           </Group>
+                                          <Component id="newcomer_aid" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="newcomer_reason" min="-2" max="-2" attributes="0"/>
-                                          <Component id="newcomer_prgrm" min="-2" pref="149" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="addNewComerBtn" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -340,7 +342,17 @@
                                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="newcomer_aid" alignment="3" min="-2" pref="74" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                              <Component id="jLabel17" min="-2" pref="68" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                              <Component id="newcomer_no" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="newcomer_prgrm" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
                                           <Component id="jLabel8" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
@@ -446,6 +458,16 @@
                           </StringArray>
                         </Property>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel17">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="&#x5b8b;&#x4f53;" size="36" style="1"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Student No"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="newcomer_no">
                     </Component>
                   </SubComponents>
                 </Container>

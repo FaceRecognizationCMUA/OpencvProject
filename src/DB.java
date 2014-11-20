@@ -29,7 +29,7 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
     static ResultSetMetaData rsmd=null;
     static String username = "admin";
     static String password = "cmua2014";
-    public static Connection DBconect() {
+    public static Connection DBconnect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");//get the driver
             conn = DriverManager.getConnection(URL, username, password);//connect
@@ -42,7 +42,7 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
 
     public static Vector<Vector> selectStudentReason(String date1, String date2) {
         try {
-            Statement stmt = DBconect().createStatement();//connect database
+            Statement stmt = DBconnect().createStatement();//connect database
             pstmt = conn.prepareStatement("SELECT andrew_id, student.stu_name,visit.reason,visit.remark,event_time FROM student,visit where student.stu_no=visit.stu_no and event_time between ? and ? order by reason");//execute the sql sentence
             pstmt.setString(1, date1);
             pstmt.setString(2, date2);
@@ -78,7 +78,7 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
 
     public static Vector<Vector> selectFrequency(String date1, String date2) {
         try {
-            Statement stmt = DBconect().createStatement();//connect database
+            Statement stmt = DBconnect().createStatement();//connect database
             pstmt = conn.prepareStatement("select event_time, gender,reason, count(*) as frequency from student,visit where student.stu_no=visit.stu_no and event_time between ? and ? group by reason,gender");
             pstmt.setString(1, date1);
             pstmt.setString(2, date2);
@@ -111,7 +111,7 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
 
     public static void addStudent(int stid, String andrewId, String studentName, String program, String gender) throws Exception {
 
-        Statement stmt = DBconect().createStatement();//connect database
+        Statement stmt = DBconnect().createStatement();//connect database
 
         pstmt = conn.prepareStatement("INSERT into student (stu_no, andrew_id, stu_name,program,gender)  VALUES (?,?,?,?,?)");
         pstmt.setInt(1, stid);
@@ -126,7 +126,7 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
     public static ArrayList selectInformation(int stid) {//返回第三问需要的所有信息
         ArrayList informationList = new ArrayList();
         try {
-            Statement stmt = DBconect().createStatement();//connect database
+            Statement stmt = DBconnect().createStatement();//connect database
             pstmt = conn.prepareStatement("SELECT * FROM student where stu_no=?");//根据label或者说学号查询学生的信息
             pstmt.setInt(1, stid);
             rs = pstmt.executeQuery();

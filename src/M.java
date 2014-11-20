@@ -199,6 +199,79 @@ public class M {
 //        facePanel.setEnabled(true);
 //        facePanel.setVisible(false);
     }
+/**
+ * This method receives parameter of andrew ID. It checks if this aID exist or not.
+ * If not, create a label by finding the biggest stu_no in database.
+ * @author Guangyao Xie
+ * @param andrewid 
+ * @return a label number for a new comer
+ * @throws Exception 
+ */
+    public static int createNewLabel(String andrewid) throws Exception {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            DB.DBconnect();
+            String sql0 = String.format("SELECT stu_no from opencv.student WHERE andrew_id = '%s'", andrewid);
+            String sql1 = String.format("SELECT MAX(stu_no) FROM opencv.student;");
+            DB.stmt = DB.conn.createStatement();
+            boolean isExist = false;
+            int label = 0;
+            DB.rs = DB.stmt.executeQuery(sql0);
+            // rs0.first();
+            while (DB.rs.next()) {
+
+                if (DB.rs.getRow() != 0) {
+                    isExist = true;
+                    throw new Exception("aid_exist");
+                }
+            }
+            DB.rs.close();
+
+            if (isExist == false) {
+                DB.rs = DB.stmt.executeQuery(sql1);
+                while (DB.rs.next()) {
+                    label = Integer.parseInt(DB.rs.getString(1)) + 1;//create new label
+                }
+                DB.rs.close();
+            }
+
+            return label;
+
+        } catch (SQLException se) {
+            System.out.println(se);
+            int label = -1;
+            return label;
+        } catch (Exception aid_exist) {
+            int label = -2;
+            return label;
+        } finally {
+            DB.conn.close();
+            System.out.println("End connection");
+        }
+
+    }
+/**
+ * This method executes insert query to the db
+ * @author Guangyao Xie
+ * @param label
+ * @param name
+ * @param andrewid
+ * @param program
+ * @param gender
+ * @throws Exception 
+ */
+    public static void writeNewComerInfo(int label, String name, String andrewid,
+            String program, String gender) throws Exception {
+        Class.forName("com.mysql.jdbc.Driver");
+        DB.sql = String.format("INSERT INTO opencv.student (stu_no, andrew_id, stu_name, program, gender)"
+                + "VALUES (%d, '%s', '%s', '%s', '%s');", label, name, andrewid, program, gender);
+
+        DB.stmt= DB.conn.createStatement();
+        DB.stmt.execute(DB.sql);
+        DB.conn.close();
+        System.out.println("Write in DB");
+    }
 
     public static void main(String[] args) throws Exception {
 //        M main=new M();
