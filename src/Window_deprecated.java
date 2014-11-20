@@ -11,12 +11,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author lh
  */
-public class Window1 extends javax.swing.JFrame {
+public class Window_deprecated extends javax.swing.JFrame {
 
     /**
      * Creates new form Window
      */
-    public Window1() {
+    public Window_deprecated() {
         initComponents();
     }
 

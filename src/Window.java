@@ -1,6 +1,9 @@
 
+import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -55,7 +58,7 @@ public class Window extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         newcomer_no = new javax.swing.JTextField();
         displayPanel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        showpic = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -79,6 +82,9 @@ public class Window extends javax.swing.JFrame {
         report_toD = new javax.swing.JComboBox();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        typeCB = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        displayTable = new javax.swing.JTable();
         trainPanel = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         train_aid = new javax.swing.JTextField();
@@ -293,7 +299,7 @@ public class Window extends javax.swing.JFrame {
 
         jTabbedPane5.addTab("New Comer", newComerPanel);
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        showpic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel9.setFont(new java.awt.Font("宋体", 1, 24)); // NOI18N
         jLabel9.setText("Name");
@@ -336,7 +342,7 @@ public class Window extends javax.swing.JFrame {
             displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(displayPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(showpic, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
                 .addGroup(displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
@@ -369,7 +375,7 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(displayPanelLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(showpic, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(displayPanelLayout.createSequentialGroup()
                         .addGroup(displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(displayPanelLayout.createSequentialGroup()
@@ -409,6 +415,11 @@ public class Window extends javax.swing.JFrame {
 
         report_confirmBtn.setFont(new java.awt.Font("宋体", 1, 24)); // NOI18N
         report_confirmBtn.setText("Confirm");
+        report_confirmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                report_confirmBtnActionPerformed(evt);
+            }
+        });
 
         report_toY.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2013", "2012", "2011", "2010" }));
 
@@ -421,6 +432,21 @@ public class Window extends javax.swing.JFrame {
 
         jLabel21.setFont(new java.awt.Font("宋体", 1, 36)); // NOI18N
         jLabel21.setText("To");
+
+        typeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Student Report", "Frequency Report" }));
+
+        displayTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(displayTable);
 
         javax.swing.GroupLayout reportPanelLayout = new javax.swing.GroupLayout(reportPanel);
         reportPanel.setLayout(reportPanelLayout);
@@ -438,33 +464,43 @@ public class Window extends javax.swing.JFrame {
                                 .addComponent(report_toY, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(reportPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                                 .addComponent(report_fromY, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(104, 104, 104)
                         .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(report_fromM, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(report_toM, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(103, 103, 103)
+                .addGap(97, 97, 97)
                 .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(report_fromD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_toD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(461, Short.MAX_VALUE))
+                .addContainerGap(463, Short.MAX_VALUE))
+            .addGroup(reportPanelLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(typeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         reportPanelLayout.setVerticalGroup(
             reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportPanelLayout.createSequentialGroup()
-                .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(reportPanelLayout.createSequentialGroup()
-                        .addGap(338, 338, 338)
+                        .addGap(49, 49, 49)
+                        .addComponent(typeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
+                    .addGroup(reportPanelLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                         .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(report_fromY, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(report_fromM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(report_fromD, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)))
+                        .addGap(28, 28, 28)))
                 .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(report_toY, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_toM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -569,9 +605,27 @@ public class Window extends javax.swing.JFrame {
     private void newcomer_prgrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newcomer_prgrmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newcomer_prgrmActionPerformed
+    void shootanddisplayicon(){
+        String path="";
+        int label=OpenCVFaceRecognizer.recognize(path);
+        ArrayList inforList = DB.selectInformation(label);
+        disp_name.setText((String) inforList.get(2));
+        disp_aid.setText((String) inforList.get(1));
+        disp_visitcount.setText((String) inforList.get(6));
+        disp_lastvisit.setText((String) inforList.get(5));
+        disp_remark.setText((String) inforList.get(8));
 
+        for (int i = 0; i < jComboBox1.getItemCount(); i++) {
+            if (jComboBox1.getItemAt(i).toString().equals((String) inforList.get(7))) {
+                jComboBox1.setSelectedIndex(i);
+            }
+        }
+        System.out.print(jComboBox1.getItemCount());
+        showpic.setIcon(new javax.swing.ImageIcon("\\photodb_resized\\1-acrall.jpg"));
+    }
     private void disp_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disp_nameActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_disp_nameActionPerformed
 
     private void shootBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootBtnActionPerformed
@@ -623,13 +677,44 @@ public class Window extends javax.swing.JFrame {
         String prgrm = newcomer_prgrm.getText();
         String gender = newcomer_gender.getSelectedItem().toString();
         try {
-            DB_deprecated.addStudent(stid, name, aid, prgrm, gender);
+            DB.addStudent(stid, name, aid, prgrm, gender);
         } catch (Exception e) {
             System.out.print(e.getMessage());
         } finally {
         }
         String reason = newcomer_reason.getSelectedItem().toString();
     }//GEN-LAST:event_addNewComerBtnActionPerformed
+
+    private void report_confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_confirmBtnActionPerformed
+        // TODO add your handling code here:
+         Vector<Vector> resultArray = new Vector<Vector>();
+        String day1 = report_fromD.getSelectedItem().toString();
+        String day2 = report_toD.getSelectedItem().toString();
+        String month1 = report_fromM.getSelectedItem().toString();
+        String month2 = report_toM.getSelectedItem().toString();
+        String year1 = report_fromY.getSelectedItem().toString();
+        String year2 = report_toY.getSelectedItem().toString();
+        String date1 = year1 + "-" + month1 + "-" + day1;
+        String date2 = year2 + "-" + month2 + "-" + day2;
+        Vector<String> titleVector = new Vector<String>();//storage the model of the column title
+        if (typeCB.getSelectedItem().toString().equals("Student Report")) {
+
+            titleVector.add("andrew_id");
+            titleVector.add("stu_name");
+            titleVector.add("reason");
+            titleVector.add("remark");
+            titleVector.add("event_time");
+            resultArray = DB.selectStudentReason(date1, date2);
+        } else {
+            titleVector.add("event_time");
+            titleVector.add("gender");
+            titleVector.add("reason");
+            titleVector.add("frequency");
+            resultArray = DB.selectFrequency(date1, date2);
+        }
+        DefaultTableModel tableModel = new DefaultTableModel(resultArray, titleVector);//make the model for the display table with colum title and content
+        displayTable.setModel(tableModel);//show the model
+    }//GEN-LAST:event_report_confirmBtnActionPerformed
 
 
 
@@ -643,6 +728,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextField disp_remark;
     private javax.swing.JTextField disp_visitcount;
     private javax.swing.JPanel displayPanel;
+    private javax.swing.JTable displayTable;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -657,7 +743,6 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -667,6 +752,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JPanel newComerPanel;
     private javax.swing.JTextField newcomer_aid;
@@ -684,8 +770,10 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JComboBox report_toM;
     private javax.swing.JComboBox report_toY;
     private javax.swing.JButton shootBtn;
+    private javax.swing.JLabel showpic;
     private javax.swing.JPanel trainPanel;
     private javax.swing.JTextField train_aid;
     private javax.swing.JButton train_confirmBtn;
+    private javax.swing.JComboBox typeCB;
     // End of variables declaration//GEN-END:variables
 }
