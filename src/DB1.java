@@ -27,6 +27,8 @@ public class DB1 {
     static ResultSet rs = null;
     static String username = "admin";
     static String password = "cmua2014";
+    static Statement stmt;
+    static ResultSetMetaData rsmd;
 
     public static Connection DBconect() {
         try {
