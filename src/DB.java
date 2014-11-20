@@ -29,7 +29,9 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
     static ResultSetMetaData rsmd=null;
     static String username = "admin";
     static String password = "cmua2014";
+
     public static Connection DBconnect() {
+
         try {
             Class.forName("com.mysql.jdbc.Driver");//get the driver
             conn = DriverManager.getConnection(URL, username, password);//connect
