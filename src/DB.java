@@ -33,12 +33,14 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
     public static Connection DBconnect() {
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");//get the driver
-            conn = DriverManager.getConnection(URL, username, password);//connect
+//            Class.forName("com.mysql.jdbc.Driver");//get the driver
+//            conn = DriverManager.getConnection(URL, username, password);//connect
+            conn = DriverManager.getConnection(URL, username, password);
+            stmt=conn.createStatement();
+            System.out.println("Connected!");
         } catch (Exception e) {
             System.out.printf(e.getMessage());
-        } finally {
-        }
+        } 
         return conn;//return the connection to use
     }
 
@@ -128,10 +130,15 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
     public static ArrayList selectInformation(int stid) {//返回第三问需要的所有信息
         ArrayList informationList = new ArrayList();
         try {
-            Statement stmt = DBconnect().createStatement();//connect database
+            stmt = DBconnect().createStatement();//connect database
             pstmt = conn.prepareStatement("SELECT * FROM student where stu_no=?");//根据label或者说学号查询学生的信息
             pstmt.setInt(1, stid);
             rs = pstmt.executeQuery();
+            rsmd=rs.getMetaData();
+//            sql="SELECT * FROM student where stu_no="+stid+";";
+//            rs=stmt.executeQuery(sql);
+            rs.first();
+            System.out.println(rs.toString());
             int id = rs.getInt("stu_no");
             String aid = rs.getString("andrew_id");
             String name = rs.getString("stu_name");
@@ -151,6 +158,7 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
             pstmt = conn.prepareStatement("select count(*) as frequency from visit where stu_no=?;");//根据label或者说学号查询学生的信息
             pstmt.setInt(1, stid);
             rs = pstmt.executeQuery();
+            rs.first();
             int frequency = rs.getInt("frequency");
             informationList.add(frequency);//访问次数
             pstmt = conn.prepareStatement("select * from visit where stu_no=? ORDER BY event_time;");//根据label或者说学号查询学生的信息
@@ -168,11 +176,13 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
         return informationList;
     }
      static String[] findStudentByLabel(int n){
-        String[] result=null;
+        String[] result=new String[5];
         try{
             sql="select * from student where stu_no='"+n+"';";
+            
             pstmt = conn.prepareStatement(sql);
             rs=pstmt.executeQuery(sql);
+            System.out.println(sql);
 //            DB0.rsmd=rs.getMetaData();
             String no=n+"";
             String andrew_id=rs.getString(2);
@@ -180,6 +190,7 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
             String program=rs.getString(4);
             String gender=rs.getString(5);
             result=new String[]{no,andrew_id,name,program,gender};
+            
         }
         catch(SQLException e){
             System.out.println(e);
@@ -218,12 +229,12 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
         return result;
     }
     static int findLastVisitTimeByLabel(int n){
-        int result=0;
+        int result;
         try{
             sql="select max(event_time) from visit where stu_no='"+n+"';";
             rs=stmt.executeQuery(sql);
             rsmd=rs.getMetaData();
-            result=rs.getInt(1);
+            result=rs.getDate(1);
         }
         catch(SQLException e){
             System.out.println(e);

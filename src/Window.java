@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -16,12 +18,13 @@ import javax.swing.table.DefaultTableModel;
  * @author lh
  */
 public class Window extends javax.swing.JFrame {
-
+    public Window me;
     /**
      * Creates new form Window
      */
     public Window() {
         initComponents();
+        me=this;
     }
 
     /**
@@ -40,7 +43,7 @@ public class Window extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTabbedPane5 = new javax.swing.JTabbedPane();
+        TabPane = new javax.swing.JTabbedPane();
         detectPanel = new javax.swing.JPanel();
         shootBtn = new javax.swing.JButton();
         newComerPanel = new javax.swing.JPanel();
@@ -64,7 +67,7 @@ public class Window extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        reason = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         disp_name = new javax.swing.JTextField();
         disp_aid = new javax.swing.JTextField();
@@ -148,7 +151,7 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TabPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         shootBtn.setBackground(new java.awt.Color(0, 0, 0));
         shootBtn.setFont(new java.awt.Font("宋体", 1, 48)); // NOI18N
@@ -177,7 +180,7 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap(275, Short.MAX_VALUE))
         );
 
-        jTabbedPane5.addTab("Detect", detectPanel);
+        TabPane.addTab("Detect", detectPanel);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -297,7 +300,7 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane5.addTab("New Comer", newComerPanel);
+        TabPane.addTab("New Comer", newComerPanel);
 
         showpic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -316,11 +319,11 @@ public class Window extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("宋体", 1, 24)); // NOI18N
         jLabel13.setText("Remark");
 
-        jComboBox1.setFont(new java.awt.Font("宋体", 0, 24)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "stapler", "tuition fees", "complaints", "collect assignments", "meet people", "other", " " }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        reason.setFont(new java.awt.Font("宋体", 0, 24)); // NOI18N
+        reason.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "stapler", "tuition fees", "complaints", "collect assignments", "meet people", "other", " " }));
+        reason.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                reasonActionPerformed(evt);
             }
         });
 
@@ -343,7 +346,7 @@ public class Window extends javax.swing.JFrame {
             .addGroup(displayPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(showpic, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addGap(61, 61, 61)
                 .addGroup(displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
@@ -353,7 +356,7 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(jLabel14))
                 .addGap(39, 39, 39)
                 .addGroup(displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reason, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(disp_name, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(disp_remark, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(displayPanelLayout.createSequentialGroup()
@@ -401,11 +404,11 @@ public class Window extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(reason, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(166, Short.MAX_VALUE))
         );
 
-        jTabbedPane5.addTab("Display", displayPanel);
+        TabPane.addTab("Display", displayPanel);
 
         report_fromY.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2013", "2012", "2011", "2010" }));
 
@@ -455,26 +458,28 @@ public class Window extends javax.swing.JFrame {
             .addGroup(reportPanelLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(report_confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(reportPanelLayout.createSequentialGroup()
-                        .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(reportPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(report_toY, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(reportPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                                .addComponent(report_fromY, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(104, 104, 104)
-                        .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(report_fromM, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(report_toM, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(report_toY, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(reportPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addComponent(report_fromY, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(104, 104, 104)
+                .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(report_fromM, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_toM, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(97, 97, 97)
                 .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(report_fromD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(report_toD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(463, Short.MAX_VALUE))
+                    .addGroup(reportPanelLayout.createSequentialGroup()
+                        .addComponent(report_toD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(463, Short.MAX_VALUE))
+                    .addGroup(reportPanelLayout.createSequentialGroup()
+                        .addComponent(report_fromD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(report_confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(155, 155, 155))))
             .addGroup(reportPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(typeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -495,23 +500,22 @@ public class Window extends javax.swing.JFrame {
                     .addGroup(reportPanelLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                         .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(report_fromY, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(report_fromM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(report_fromD, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(report_fromD, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(report_confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)))
                 .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(report_toY, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_toM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_toD, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(report_confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
-        jTabbedPane5.addTab("Report", reportPanel);
+        TabPane.addTab("Report", reportPanel);
 
         jLabel16.setFont(new java.awt.Font("宋体", 1, 36)); // NOI18N
         jLabel16.setText("Andrew ID");
@@ -547,7 +551,7 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap(173, Short.MAX_VALUE))
         );
 
-        jTabbedPane5.addTab("Train", trainPanel);
+        TabPane.addTab("Train", trainPanel);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -555,14 +559,14 @@ public class Window extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1033, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1033, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 568, Short.MAX_VALUE)
+                .addComponent(TabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 568, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -598,30 +602,34 @@ public class Window extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void reasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reasonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_reasonActionPerformed
 
     private void newcomer_prgrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newcomer_prgrmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newcomer_prgrmActionPerformed
-    void shootanddisplayicon(){
-        String path="";
-        int label=OpenCVFaceRecognizer.recognize(path);
+    void showicon(int label){
+//        int label=OpenCVFaceRecognizer.recognize(path);
         ArrayList inforList = DB.selectInformation(label);
         disp_name.setText((String) inforList.get(2));
         disp_aid.setText((String) inforList.get(1));
-        disp_visitcount.setText((String) inforList.get(6));
-        disp_lastvisit.setText((String) inforList.get(5));
-        disp_remark.setText((String) inforList.get(8));
-
-        for (int i = 0; i < jComboBox1.getItemCount(); i++) {
-            if (jComboBox1.getItemAt(i).toString().equals((String) inforList.get(7))) {
-                jComboBox1.setSelectedIndex(i);
+        disp_visitcount.setText(inforList.get(6).toString());
+        disp_lastvisit.setText(inforList.get(5).toString());
+//        disp_remark.setText((String) inforList.get(8));
+        
+        
+//        String[] result=DB.findStudentByLabel(label);
+//        disp_name.setText(result[2]);
+//        disp_aid.setText(result[1]);
+//        disp_visitcount.setText(result[]);
+        for (int i = 0; i < reason.getItemCount(); i++) {
+            if (reason.getItemAt(i).toString().equals((String) inforList.get(7))) {
+                reason.setSelectedIndex(i);
             }
         }
-        System.out.print(jComboBox1.getItemCount());
-        showpic.setIcon(new javax.swing.ImageIcon("\\photodb_resized\\1-acrall.jpg"));
+        System.out.print(reason.getItemCount());
+        showpic.setIcon(new javax.swing.ImageIcon("\\photodb\\"+label+"-"+disp_aid.getText()+".jpg"));
     }
     private void disp_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disp_nameActionPerformed
         // TODO add your handling code here:
@@ -630,26 +638,34 @@ public class Window extends javax.swing.JFrame {
 
     private void shootBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootBtnActionPerformed
         // TODO add your handling code here:
-        String[] result_stu;
-        String[] result_visit;
+//        String[] result_stu;
+//        String[] result_visit;
         try{
 //            M.realtimeCamera();
             System.out.println("WINDOW: " + Thread.currentThread());
+                        
             Thread t = new Thread(new Runnable() {
                 String[] result_stu;
-                String[] result_visit;
+                int result_visit;
                 public void run() {
                     try {
                         String imgpath=M.realtimeCamera();//bug here
                         int label=OpenCVFaceRecognizer.recognize(imgpath);
-                        DB_deprecated.connectDB();
-                        result_stu=DB_deprecated.findStudentByLabel(label);
-                        result_visit=DB_deprecated.findEventByLabel(label);
-                        disp_name.setText(result_stu[2]);
-                        disp_aid.setText(result_visit[1]);
-                        disp_visitcount.setText(DB_deprecated.calcVisitTimeByLabel(label)+"");
+                        
+                        RemindJFrame r=new RemindJFrame();
+                        r.setLabel(me,label);
+                        r.setVisible(true);
+                        
+//                        DB.DBconnect();
+                        showicon(label);
+//                        result_stu=DB.findStudentByLabel(label);
+//                        result_visit=DB.findLastVisitTimeByLabel(label);
+//                        disp_name.setText(result_stu[2]);
+//                        disp_aid.setText(result_visit);
+//                        disp_visitcount.setText(DB.calcVisitTimeByLabel(label)+"");
+                        
                     } catch (Exception ex) {
-                        Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+//                        Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
@@ -668,7 +684,9 @@ public class Window extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_shootBtnActionPerformed
-
+    public void selectTab(int index){
+        TabPane.setSelectedIndex(index);
+    }
     private void addNewComerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewComerBtnActionPerformed
         // TODO add your handling code here:
         int stid = Integer.valueOf(newcomer_no.getText());
@@ -719,6 +737,7 @@ public class Window extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane TabPane;
     private javax.swing.JButton addNewComerBtn;
     private javax.swing.JPanel detectPanel;
     private javax.swing.JTextField disp_aid;
@@ -729,7 +748,6 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextField disp_visitcount;
     private javax.swing.JPanel displayPanel;
     private javax.swing.JTable displayTable;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -753,7 +771,6 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JPanel newComerPanel;
     private javax.swing.JTextField newcomer_aid;
     private javax.swing.JComboBox newcomer_gender;
@@ -761,6 +778,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextField newcomer_no;
     private javax.swing.JTextField newcomer_prgrm;
     private javax.swing.JComboBox newcomer_reason;
+    private javax.swing.JComboBox reason;
     private javax.swing.JPanel reportPanel;
     private javax.swing.JButton report_confirmBtn;
     private javax.swing.JComboBox report_fromD;

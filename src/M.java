@@ -103,7 +103,7 @@ public class M {
 //                    System.out.println("enabled?"+facePanel.isEnabled());//true
 //                    System.out.println("validity?"+facePanel.isValid());//true
                     MatOfByte mb = new MatOfByte();
-                    Highgui.imencode(".jpg", temp, mb);
+                    Highgui.imencode(".jpg", webcam_image, mb);
                     BufferedImage image = ImageIO.read(new ByteArrayInputStream(mb.toArray()));
                     destPath = "build\\classes\\cam_img\\capture.jpg";
                     File file = new File(destPath);
@@ -117,6 +117,8 @@ public class M {
         }
         webCam.release(); //release the webcam
         String imgPath = resize(destPath);
+        flag=true;
+        frame.dispose();
         return imgPath;
     }
 
@@ -278,9 +280,10 @@ public class M {
         int sno;
 //        init();
 //        System.out.println(findLabel("photodb","hongl"));
-//        Window1 w=new Window1();
+        Window w=new Window();
         System.out.println("MAIN: " + Thread.currentThread());
         new Window().setVisible(true);
+        
         OpenCVFaceRecognizer.train("photodb_resized");
 //        realtimeCamera();
 //        DB.connectDB();
