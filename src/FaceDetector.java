@@ -58,8 +58,8 @@ public class FaceDetector {
           face_cascade.detectMultiScale(mGrey, faces);  
           for(Rect rect:faces.toArray())  
           {  
-              ImageFilter cropFilter = new CropImageFilter(rect.x, rect.y, rect.width, rect.height);
-              BufferedImage tag = new BufferedImage(rect.width, rect.height, BufferedImage.TYPE_INT_RGB);
+            ImageFilter cropFilter = new CropImageFilter(rect.x, rect.y, rect.width, rect.height);
+            BufferedImage tag = new BufferedImage(rect.width, rect.height, BufferedImage.TYPE_INT_RGB);
             File file = new File("build\\classes\\cam_img\\capture.jpg");
             BufferedImage src = ImageIO.read(file);
             Image img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(src.getSource(), cropFilter));
@@ -67,8 +67,8 @@ public class FaceDetector {
             Graphics g = output.getGraphics();
             g.drawImage(img, 0, 0,134,148,null);
             g.dispose();
-            String dir = "img_resized\\cut_image.jpg";
-            File f = new File(dir);
+            String dest = "img_resized\\cut_image.jpg";
+            File f = new File(dest);
             ImageIO.write(output, "JPEG", f);
             Point center= new Point(rect.x + rect.width*0.5, rect.y + rect.height*0.5 );  
 //               //draw a blue eclipse around face

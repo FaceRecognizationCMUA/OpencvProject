@@ -45,6 +45,7 @@ public class OpenCVFaceRecognizer {
         double[] pconfidence = new double[1];
         faceRecognizer.predict(testImage, ints, pconfidence);
 //        System.out.println(faceRecognizer.predict(testImage));
+        M.distance=pconfidence[0];
         System.out.println(pconfidence[0]);
         System.out.println("Predicted label: " + predictedLabel);
         return predictedLabel;

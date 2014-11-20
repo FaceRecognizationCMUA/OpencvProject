@@ -24,13 +24,12 @@ public class FacePanel extends javax.swing.JPanel {
      */
     public FacePanel() {
         initComponents();
-        
     }
      public boolean matToBufferedImage(Mat matrix) {  
           MatOfByte mb=new MatOfByte();  
-          Highgui.imencode(".jpg", matrix, mb);  
+          Highgui.imencode(".jpg", matrix, mb);
           try {  
-               this.image = ImageIO.read(new ByteArrayInputStream(mb.toArray()));  
+                this.image = ImageIO.read(new ByteArrayInputStream(mb.toArray())); 
           } catch (IOException e) {  
                e.printStackTrace();  
                return false; // Error  
