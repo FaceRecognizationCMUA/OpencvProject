@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import org.opencv.core.Core;
@@ -35,7 +36,7 @@ import org.opencv.objdetect.CascadeClassifier;
  *
  * @author Sky Xu <Sky Xu at Carnegie Mellon University>
  */
-public class M {
+public class Main {
 
     static double distance;
     private File file = null;
@@ -44,6 +45,7 @@ public class M {
     static boolean flag = true;
     static final int WIDTH = 134;
     static final int HEIGHT = 148;
+    public static boolean status;
 
     static {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -85,7 +87,7 @@ public class M {
         VideoCapture webCam = new VideoCapture(0);
         if (webCam.isOpened()) {
 //            Thread.sleep(500); /// This one-time delay allows the Webcam to initialize itself  
-            while (M.flag) {
+            while (Main.flag) {
                 webCam.read(webcam_image);
                 if (!webcam_image.empty()) {
 //                    Thread.sleep(200); /// This delay eases the computational load .. with little performance leakage
@@ -146,6 +148,7 @@ public class M {
             }
         }
         if (!labelList.isEmpty()) {
+            Collections.sort(labelList);
             i = labelList.get(labelList.size() - 1);
             System.out.println("max label is " + i);
             System.out.println("new label is " + (i + 1));
@@ -174,6 +177,10 @@ public class M {
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(image, faceDetections);
         System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
+        if(faceDetections.toArray().length>0)
+        {
+            status=true;
+        }
         int count = 1;
         String dir = "";
         for (Rect rect : faceDetections.toArray()) {
@@ -347,7 +354,7 @@ public class M {
     }
 
     public static void main(String[] args) throws Exception {
-//        M main=new M();
+//        Main main=new Main();
         int sno;
 //        init();
 //        System.out.println(findLabel("photodb","hongl"));

@@ -21,7 +21,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,4,30,0,0,4,98"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,85,0,0,4,98"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -64,9 +64,9 @@
                   <Component id="jLabel1" min="-2" pref="65" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel3" min="-2" pref="484" max="-2" attributes="0"/>
+                  <EmptySpace pref="150" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -187,8 +187,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TabPane" pref="568" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="TabPane" min="-2" pref="613" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -229,7 +229,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
                               <Component id="shootBtn" min="-2" pref="108" max="-2" attributes="0"/>
-                              <EmptySpace pref="275" max="32767" attributes="0"/>
+                              <EmptySpace pref="323" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -563,7 +563,7 @@
                                   <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="reason" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="166" max="32767" attributes="0"/>
+                              <EmptySpace pref="216" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -691,7 +691,7 @@
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="51" max="32767" attributes="0"/>
+                                      <EmptySpace pref="48" max="32767" attributes="0"/>
                                       <Component id="report_fromY" min="-2" pref="70" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -704,7 +704,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="report_toD" min="-2" pref="50" max="-2" attributes="0"/>
-                                      <EmptySpace pref="463" max="32767" attributes="0"/>
+                                      <EmptySpace pref="461" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="report_fromD" min="-2" pref="50" max="-2" attributes="0"/>
@@ -736,8 +736,8 @@
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane1" min="-2" pref="195" max="-2" attributes="0"/>
-                                      <EmptySpace pref="101" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane1" min="-2" pref="178" max="-2" attributes="0"/>
+                                      <EmptySpace pref="39" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="report_fromY" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                                           <Component id="report_fromM" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
@@ -753,7 +753,7 @@
                                   <Component id="report_toD" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                                   <Component id="jLabel21" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="65" max="32767" attributes="0"/>
+                              <EmptySpace pref="194" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1002,7 +1002,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
                               <Component id="train_confirmBtn" min="-2" pref="77" max="-2" attributes="0"/>
-                              <EmptySpace pref="173" max="32767" attributes="0"/>
+                              <EmptySpace pref="221" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>

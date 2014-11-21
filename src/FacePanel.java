@@ -80,7 +80,7 @@ public class FacePanel extends javax.swing.JPanel {
 
     private void shootBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootBtnActionPerformed
         // TODO add your handling code here:
-        M.flag=false;
+        Main.flag=false;
     }//GEN-LAST:event_shootBtnActionPerformed
 
 

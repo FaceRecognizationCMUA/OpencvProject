@@ -31,7 +31,7 @@ import static org.bytedeco.javacpp.opencv_highgui.*;
  * @author Samuel Audet
  */
 public class OpenCVFaceRecognizer {
-
+    public boolean status;
     public static FaceRecognizer faceRecognizer = createLBPHFaceRecognizer();
 //             FaceRecognizer faceRecognizer = createFisherFaceRecognizer();
 //         FaceRecognizer faceRecognizer = createEigenFaceRecognizer();
@@ -49,7 +49,7 @@ public class OpenCVFaceRecognizer {
         double[] pconfidence = new double[1];
         faceRecognizer.predict(testImage, ints, pconfidence);
 //        System.out.println(faceRecognizer.predict(testImage));
-        M.distance = pconfidence[0];
+        Main.distance = pconfidence[0];
         System.out.println(pconfidence[0]);
         System.out.println("Predicted label: " + predictedLabel);
         return predictedLabel;
@@ -76,7 +76,7 @@ public class OpenCVFaceRecognizer {
         IntBuffer labelsBuf = labels.getIntBuffer();
         int counter = 0;
         for (File image : imageFiles) {
-//            M.resize(image.getPath());
+//            Main.resize(image.getPath());
             Mat img = imread(image.getAbsolutePath(), CV_LOAD_IMAGE_GRAYSCALE);
 //            System.out.println(image.getName());//test
             int label = Integer.parseInt(image.getName().split("\\-")[0]);

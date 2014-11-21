@@ -89,18 +89,15 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
             pstmt.setString(2, date2);
             rs = pstmt.executeQuery();
             rs.last();//to get the number of the row
-            int rowCount = rs.getRow();
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();//get the column number
+//            int rowCount = rs.getRow();
+//          int columnCount = rsmd.getColumnCount();//get the column number
             rs.first();//move back to the first row
             Vector<Vector> resultArray = new Vector<Vector>();//to storage the data
             do {//to get the student id, student name, sex and email
-                Date date = rs.getDate("event_time");
                 String gender = rs.getString("gender");
                 String reason = rs.getString("reason");
                 int frequency = rs.getInt("frequency");
                 Vector row = new Vector();
-                row.add(date);
                 row.add(gender);//storage into vector
                 row.add(reason);
                 row.add(frequency);

@@ -25,6 +25,10 @@ public void setLabel(Window w,int label)
     String[] id=DB.findNameByLabel(label);
     String adr="photodb_resized\\"+label+"-"+id[1]+".jpg";
     piclabel.setIcon(new javax.swing.ImageIcon(adr));
+    if(id[0]==null){
+         namelabel.setText("We are not able to detect your face!");
+    }
+    else
     namelabel.setText("Are you: "+id[0]+"?");
 }
     /**
@@ -58,7 +62,7 @@ public void setLabel(Window w,int label)
             }
         });
 
-        newBtn.setText("Comer I = new Comer()");
+        newBtn.setText("I'm new comer");
         newBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newBtnActionPerformed(evt);
@@ -70,22 +74,23 @@ public void setLabel(Window w,int label)
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
-                .addComponent(yesBtn)
-                .addGap(35, 35, 35)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(piclabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(yesBtn)
+                        .addGap(35, 35, 35)
                         .addComponent(noBtn)
                         .addGap(37, 37, 37)
-                        .addComponent(newBtn)
-                        .addGap(25, 25, 25))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(piclabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(namelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(129, 129, 129))
+                        .addComponent(newBtn))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(namelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104)))
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

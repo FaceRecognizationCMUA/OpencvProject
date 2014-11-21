@@ -15,19 +15,20 @@ import javax.swing.table.DefaultTableModel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author lh
  */
 public class Window extends javax.swing.JFrame {
+
     public Window me;
+
     /**
      * Creates new form Window
      */
     public Window() {
         initComponents();
-        me=this;
+        me = this;
     }
 
     /**
@@ -180,7 +181,7 @@ public class Window extends javax.swing.JFrame {
             .addGroup(detectPanelLayout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addComponent(shootBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
 
         TabPane.addTab("Detect", detectPanel);
@@ -413,7 +414,7 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(reason, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
 
         TabPane.addTab("Display", displayPanel);
@@ -472,7 +473,7 @@ public class Window extends javax.swing.JFrame {
                         .addComponent(report_toY, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(reportPanelLayout.createSequentialGroup()
                         .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addComponent(report_fromY, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(104, 104, 104)
                 .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -482,7 +483,7 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(reportPanelLayout.createSequentialGroup()
                         .addComponent(report_toD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(463, Short.MAX_VALUE))
+                        .addContainerGap(461, Short.MAX_VALUE))
                     .addGroup(reportPanelLayout.createSequentialGroup()
                         .addComponent(report_fromD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -507,8 +508,8 @@ public class Window extends javax.swing.JFrame {
                         .addGap(27, 27, 27))
                     .addGroup(reportPanelLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(report_fromY, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(report_fromM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -520,7 +521,7 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(report_toM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_toD, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         TabPane.addTab("Report", reportPanel);
@@ -561,7 +562,7 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(train_aid))
                 .addGap(117, 117, 117)
                 .addComponent(train_confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         TabPane.addTab("Train", trainPanel);
@@ -579,8 +580,8 @@ public class Window extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 568, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(TabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -606,8 +607,8 @@ public class Window extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -622,21 +623,20 @@ public class Window extends javax.swing.JFrame {
     private void newcomer_prgrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newcomer_prgrmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newcomer_prgrmActionPerformed
-    void showicon(int label){
+    void showicon(int label) {
 //        int label=OpenCVFaceRecognizer.recognize(path);
         ArrayList inforList = DB.selectInformation(label);
         disp_name.setText((String) inforList.get(2));
         disp_aid.setText((String) inforList.get(1));
         disp_visitcount.setText(inforList.get(6).toString());
         disp_lastvisit.setText(inforList.get(5).toString());
-        
+
         disp_name.setEnabled(false);
         disp_aid.setEnabled(false);
         disp_visitcount.setEnabled(false);
         disp_lastvisit.setEnabled(false);
 //        disp_remark.setText((String) inforList.get(8));
-        
-        
+
 //        String[] result=DB.findStudentByLabel(label);
 //        disp_name.setText(result[2]);
 //        disp_aid.setText(result[1]);
@@ -647,36 +647,42 @@ public class Window extends javax.swing.JFrame {
 //            }
 //        }
 //        System.out.print(reason.getItemCount());
-        String path="photodb\\"+label+"-"+disp_aid.getText()+".jpg";
+        String path = "photodb\\" + label + "-" + disp_aid.getText() + ".jpg";
 //        System.out.println(path);//test
         showpic.setIcon(new javax.swing.ImageIcon(path));
-        
+
     }
     private void disp_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disp_nameActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_disp_nameActionPerformed
 
     private void shootBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootBtnActionPerformed
         // TODO add your handling code here:
 //        String[] result_stu;
 //        String[] result_visit;
-        try{
-//            M.realtimeCamera();
+        try {
+//            Main.realtimeCamera();
             System.out.println("WINDOW: " + Thread.currentThread());
-                        
+
             Thread t = new Thread(new Runnable() {
                 String[] result_stu;
                 int result_visit;
+
                 public void run() {
                     try {
-                        String imgpath=M.realtimeCamera();//call camera
-                        int label=OpenCVFaceRecognizer.recognize(imgpath);
+                        String imgpath = Main.realtimeCamera();//call camera
+                        if (Main.status) {
+                            javax.swing.JOptionPane jop = new javax.swing.JOptionPane();
+                            jop.showMessageDialog(null, "Face Detected!Processing...");
+                        }
                         
-                        RemindJFrame r=new RemindJFrame();
-                        r.setLabel(me,label);
+                        int label = OpenCVFaceRecognizer.recognize(imgpath);
+
+                        RemindJFrame r = new RemindJFrame();
+                        r.setLabel(me, label);
                         r.setVisible(true);
-                        
+
 //                        DB.DBconnect();
 //                        showicon(label);
 //                        result_stu=DB.findStudentByLabel(label);
@@ -684,28 +690,24 @@ public class Window extends javax.swing.JFrame {
 //                        disp_name.setText(result_stu[2]);
 //                        disp_aid.setText(result_visit);
 //                        disp_visitcount.setText(DB.calcVisitTimeByLabel(label)+"");
-                        
                     } catch (Exception ex) {
 //                        Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
             t.start();
-            
-            
+
 //            int label=OpenCVFaceRecognizer.recognize("imgpath");
 //            result_stu=DB_deprecated.findStudentByLabel(label);
 //            result_visit=DB_deprecated.findEventByLabel(label);
 //            disp_name.setText(result_stu[2]);
 //            disp_aid.setText(result_visit[1]);
 //            disp_visitcount.setText(DB_deprecated.calcVisitTimeByLabel(label)+"");
-            
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }//GEN-LAST:event_shootBtnActionPerformed
-    public void selectTab(int index){
+    public void selectTab(int index) {
         TabPane.setSelectedIndex(index);
     }
     private void addNewComerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewComerBtnActionPerformed
@@ -714,9 +716,11 @@ public class Window extends javax.swing.JFrame {
         String name = newcomer_name.getText();
         String aid = newcomer_aid.getText();
         String prgrm = newcomer_prgrm.getText();
-        String gender =newcomer_gender.getSelectedItem().toString().substring(0, 1);
+        String gender = newcomer_gender.getSelectedItem().toString().substring(0, 1);
         try {
             DB.addStudent(stid, aid, name, prgrm, gender);
+            javax.swing.JOptionPane jop = new javax.swing.JOptionPane();
+            jop.showMessageDialog(null, "New comer added!");
         } catch (Exception e) {
             System.out.print(e.getMessage());
         } finally {
@@ -726,7 +730,7 @@ public class Window extends javax.swing.JFrame {
 
     private void report_confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_confirmBtnActionPerformed
         // TODO add your handling code here:
-         Vector<Vector> resultArray = new Vector<Vector>();
+        Vector<Vector> resultArray = new Vector<Vector>();
         String day1 = report_fromD.getSelectedItem().toString();
         String day2 = report_toD.getSelectedItem().toString();
         String month1 = report_fromM.getSelectedItem().toString();
@@ -745,7 +749,6 @@ public class Window extends javax.swing.JFrame {
             titleVector.add("event_time");
             resultArray = DB.selectStudentReason(date1, date2);
         } else {
-            titleVector.add("event_time");
             titleVector.add("gender");
             titleVector.add("reason");
             titleVector.add("frequency");
@@ -762,10 +765,14 @@ public class Window extends javax.swing.JFrame {
             Thread t = new Thread(new Runnable() {
                 public void run() {
                     try {
-                        String imgpath = M.realtimeCamera();//bug here
+                        String imgpath = Main.realtimeCamera();//bug here
                         String aid = train_aid.getText();
-                        int trainNumber = M.createLabelInput(aid);
-                        M.resize(imgpath, train_aid.getText(), trainNumber);
+                        int trainNumber = Main.createLabelInput(aid);
+                        Main.resize(imgpath, train_aid.getText(), trainNumber);
+                        if (Main.status) {
+                            javax.swing.JOptionPane jop = new javax.swing.JOptionPane();
+                            jop.showMessageDialog(null, "Face detected!");
+                        }
                     } catch (Exception ex) {
                         Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -785,13 +792,14 @@ public class Window extends javax.swing.JFrame {
         Date date = new Date();
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
         String visitdate = dateformat.format(date);
-        int no=M.findLabel("photodb\\",disp_aid.getText());
-        String visitreason=reason.getSelectedItem().toString();
+        int no = Main.findLabel("photodb\\", disp_aid.getText());
+        String visitreason = reason.getSelectedItem().toString();
 //        System.out.println(visitreason);//test
-        String remark=disp_remark.getText();
-        DB.addVisit(visitdate,no,visitreason,remark);
+        String remark = disp_remark.getText();
+        DB.addVisit(visitdate, no, visitreason, remark);
+        javax.swing.JOptionPane jop = new javax.swing.JOptionPane();
+        jop.showMessageDialog(null, "New record added!");
     }//GEN-LAST:event_disp_confirmBtnActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
