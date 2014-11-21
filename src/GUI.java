@@ -19,14 +19,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author lh
  */
-public class Window extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame {
 
-    public Window me;
+    public GUI me;
 
     /**
      * Creates new form Window
      */
-    public Window() {
+    public GUI() {
         initComponents();
         me = this;
     }
@@ -624,7 +624,7 @@ public class Window extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_newcomer_prgrmActionPerformed
     void showicon(int label) {
-//        int label=OpenCVFaceRecognizer.recognize(path);
+//        int label=Recognizer.recognize(path);
         ArrayList inforList = DB.selectInformation(label);
         disp_name.setText((String) inforList.get(2));
         disp_aid.setText((String) inforList.get(1));
@@ -658,11 +658,9 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_disp_nameActionPerformed
 
     private void shootBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootBtnActionPerformed
-        // TODO add your handling code here:
-//        String[] result_stu;
-//        String[] result_visit;
+
         try {
-//            Main.realtimeCamera();
+//            Main.camera();
             System.out.println("WINDOW: " + Thread.currentThread());
 
             Thread t = new Thread(new Runnable() {
@@ -671,38 +669,25 @@ public class Window extends javax.swing.JFrame {
 
                 public void run() {
                     try {
-                        String imgpath = Main.realtimeCamera();//call camera
+                        String imgpath = Main.camera();//call camera
                         if (Main.status) {
                             javax.swing.JOptionPane jop = new javax.swing.JOptionPane();
                             jop.showMessageDialog(null, "Face Detected!Processing...");
                         }
                         
-                        int label = OpenCVFaceRecognizer.recognize(imgpath);
+                        int label = Recognizer.recognize(imgpath);
 
-                        RemindJFrame r = new RemindJFrame();
+                        IDConfirmWindow r = new IDConfirmWindow();
                         r.setLabel(me, label);
                         r.setVisible(true);
 
-//                        DB.DBconnect();
-//                        showicon(label);
-//                        result_stu=DB.findStudentByLabel(label);
-//                        result_visit=DB.findLastVisitTimeByLabel(label);
-//                        disp_name.setText(result_stu[2]);
-//                        disp_aid.setText(result_visit);
-//                        disp_visitcount.setText(DB.calcVisitTimeByLabel(label)+"");
                     } catch (Exception ex) {
-//                        Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+//                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
             t.start();
 
-//            int label=OpenCVFaceRecognizer.recognize("imgpath");
-//            result_stu=DB_deprecated.findStudentByLabel(label);
-//            result_visit=DB_deprecated.findEventByLabel(label);
-//            disp_name.setText(result_stu[2]);
-//            disp_aid.setText(result_visit[1]);
-//            disp_visitcount.setText(DB_deprecated.calcVisitTimeByLabel(label)+"");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -765,7 +750,7 @@ public class Window extends javax.swing.JFrame {
             Thread t = new Thread(new Runnable() {
                 public void run() {
                     try {
-                        String imgpath = Main.realtimeCamera();//bug here
+                        String imgpath = Main.camera();//bug here
                         String aid = train_aid.getText();
                         int trainNumber = Main.createLabelInput(aid);
                         Main.resize(imgpath, train_aid.getText(), trainNumber);
@@ -774,7 +759,7 @@ public class Window extends javax.swing.JFrame {
                             jop.showMessageDialog(null, "Face detected!");
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });

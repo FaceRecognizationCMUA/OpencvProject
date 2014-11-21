@@ -8,16 +8,16 @@
  *
  * @author Sky Xu <Sky Xu at Carnegie Mellon University>
  */
-public class RemindJFrame extends javax.swing.JFrame {
+public class IDConfirmWindow extends javax.swing.JFrame {
     int label;
-    Window w;
+    GUI w;
     /**
      * Creates new form RemindJFrame
      */
-    public RemindJFrame() {
+    public IDConfirmWindow() {
         initComponents();
     }
-public void setLabel(Window w,int label)
+public void setLabel(GUI w,int label)
 {
 //    M.findLabel("photodb_resized\\",stid);
     this.label=label;
@@ -78,7 +78,7 @@ public void setLabel(Window w,int label)
                 .addComponent(piclabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(96, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+                .addContainerGap(86, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(yesBtn)
@@ -87,7 +87,6 @@ public void setLabel(Window w,int label)
                         .addGap(37, 37, 37)
                         .addComponent(newBtn))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(namelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(104, 104, 104)))
                 .addGap(55, 55, 55))
@@ -147,20 +146,20 @@ public void setLabel(Window w,int label)
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(RemindJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(IDConfirmWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(RemindJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(IDConfirmWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(RemindJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(IDConfirmWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(RemindJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(IDConfirmWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new RemindJFrame().setVisible(true);
+//                new IDConfirmWindow().setVisible(true);
 //            }
 //        });
 //    }

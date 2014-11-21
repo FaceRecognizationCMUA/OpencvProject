@@ -52,7 +52,7 @@ public class Main {
     }
 //    static JFrame frame = new JFrame("WebCam Capture - Face detection");
 //    static FaceDetector fd= new FaceDetector();
-//    static FacePanel facePanel = new FacePanel();
+//    static CameraView facePanel = new CameraView();
 //    
 
     /**
@@ -61,7 +61,7 @@ public class Main {
      *
      * @throws Exception
      */
-    public static String realtimeCamera() throws Exception {
+    public static String camera() throws Exception {
         System.out.println("Camera is called!");
         String destPath = "";
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -71,7 +71,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         FaceDetector fd = new FaceDetector();
-        FacePanel facePanel = new FacePanel();
+        CameraView facePanel = new CameraView();
 
         frame.setSize(400, 400);
         frame.setBackground(Color.BLUE);
@@ -262,7 +262,7 @@ public class Main {
         return label;
     }
 
-    static void init() {
+//    static void init() {
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //
 ////        facePanel.setVisible(false);
@@ -274,7 +274,7 @@ public class Main {
 //        facePanel.setSize(400, 400);
 //        facePanel.setEnabled(true);
 //        facePanel.setVisible(false);
-    }
+//    }
 
     /**
      * This method receives parameter of andrew ID. It checks if this aID exist
@@ -358,14 +358,14 @@ public class Main {
         int sno;
 //        init();
 //        System.out.println(findLabel("photodb","hongl"));
-        Window w = new Window();
+        GUI w = new GUI();
         System.out.println("MAIN: " + Thread.currentThread());
-        new Window().setVisible(true);
+        new GUI().setVisible(true);
 
-        OpenCVFaceRecognizer.train("photodb_resized");
-//        realtimeCamera();
+        Recognizer.train("photodb_resized");
+//        camera();
 //        DB.connectDB();
-//        sno=OpenCVFaceRecognizer.recognize(realtimeCamera());
+//        sno=Recognizer.recognize(camera());
 
     }
 }

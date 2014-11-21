@@ -30,7 +30,7 @@ import static org.bytedeco.javacpp.opencv_highgui.*;
  * @author Petter Christian Bjelland
  * @author Samuel Audet
  */
-public class OpenCVFaceRecognizer {
+public class Recognizer {
     public boolean status;
     public static FaceRecognizer faceRecognizer = createLBPHFaceRecognizer();
 //             FaceRecognizer faceRecognizer = createFisherFaceRecognizer();

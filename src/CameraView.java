@@ -16,13 +16,13 @@ import org.opencv.highgui.Highgui;
  *
  * @author Sky Xu <Sky Xu at Carnegie Mellon University>
  */
-public class FacePanel extends javax.swing.JPanel {
+public class CameraView extends javax.swing.JPanel {
     private static final long serialVersionUID = 1L;  
     private BufferedImage image;  
     /**
      * Creates new form FacePanel1
      */
-    public FacePanel() {
+    public CameraView() {
         initComponents();
     }
      public boolean matToBufferedImage(Mat matrix) {  
