@@ -5,7 +5,7 @@
  */
 
 /**
- *
+ * @author    https://sites.google.com/site/pdopencvjava/webcam/02-continually-detect-face-in-webcam
  * @author xgy
  */
 
