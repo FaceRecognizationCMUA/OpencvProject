@@ -17,7 +17,9 @@ import javax.swing.table.DefaultTableModel;
  */
 /**
  *
- * @author lh
+ * @author Hong Lei(GUI design)
+ * @author Sky Xu
+ * @author Eason Lu
  */
 public class GUI extends javax.swing.JFrame {
 
@@ -635,18 +637,7 @@ public class GUI extends javax.swing.JFrame {
         disp_aid.setEnabled(false);
         disp_visitcount.setEnabled(false);
         disp_lastvisit.setEnabled(false);
-//        disp_remark.setText((String) inforList.get(8));
 
-//        String[] result=DB.findStudentByLabel(label);
-//        disp_name.setText(result[2]);
-//        disp_aid.setText(result[1]);
-//        disp_visitcount.setText(result[]);
-//        for (int i = 0; i < reason.getItemCount(); i++) {
-//            if (reason.getItemAt(i).toString().equals((String) inforList.get(7))) {
-//                reason.setSelectedIndex(i);
-//            }
-//        }
-//        System.out.print(reason.getItemCount());
         String path = "photodb\\" + label + "-" + disp_aid.getText() + ".jpg";
 //        System.out.println(path);//test
         showpic.setIcon(new javax.swing.ImageIcon(path));
@@ -656,7 +647,10 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_disp_nameActionPerformed
-
+/**
+ * In this handler, a thread is created, to avoid conflicts between GUI and Main.camera();
+ * @param evt 
+ */
     private void shootBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootBtnActionPerformed
 
         try {
@@ -750,7 +744,7 @@ public class GUI extends javax.swing.JFrame {
             Thread t = new Thread(new Runnable() {
                 public void run() {
                     try {
-                        String imgpath = Main.camera();//bug here
+                        String imgpath = Main.camera();
                         String aid = train_aid.getText();
                         int trainNumber = Main.createLabelInput(aid);
                         Main.resize(imgpath, train_aid.getText(), trainNumber);

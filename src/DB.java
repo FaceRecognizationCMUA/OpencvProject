@@ -13,14 +13,15 @@ import java.util.Vector;
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+
  */
-/**
- *
+/**This class contains method for database operation. Including writing and reading information from database.
+ * @since 2014/11/16
  * @author Eason Lu
  */
 public class DB {
 
-static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amazonaws.com:3306/opencv";
+static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amazonaws.com:3306/opencv";// AWS-RDS
     static String sql="";
     static Connection conn = null;
     static Statement stmt=null;
@@ -152,11 +153,16 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
         }
         return name;
     }
-    public static ArrayList selectInformation(int stid) {//返回第三问需要的所有信息
+    /**
+     * This method is for reading student information from database.
+     * @param stid studentid (label of student in photo folder)
+     * @return 
+     */
+    public static ArrayList selectInformation(int stid) {   
         ArrayList informationList = new ArrayList();
         try {
             stmt = DBconnect().createStatement();//connect database
-            pstmt = conn.prepareStatement("SELECT * FROM student where stu_no=?");//根据label或者说学号查询学生的信息
+            pstmt = conn.prepareStatement("SELECT * FROM student where stu_no=?");
             pstmt.setInt(1, stid);
             rs = pstmt.executeQuery();
             rsmd=rs.getMetaData();
@@ -173,26 +179,26 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
             informationList.add(aid);
             informationList.add(name);
             informationList.add(program);
-            informationList.add(gender);//基本信息
-            pstmt = conn.prepareStatement("select event_time from visit where stu_no=? ORDER BY event_time;");//根据label或者说学号查询学生的信息
+            informationList.add(gender);//basic information
+            pstmt = conn.prepareStatement("select event_time from visit where stu_no=? ORDER BY event_time;");//by times of event happening
             pstmt.setInt(1, stid);
             rs = pstmt.executeQuery();
             rs.last();
             Date lastTime = rs.getDate("event_time");
-            informationList.add(lastTime);//最后访问
+            informationList.add(lastTime);//lastvisit
             pstmt = conn.prepareStatement("select count(*) as frequency from visit where stu_no=?;");//根据label或者说学号查询学生的信息
             pstmt.setInt(1, stid);
             rs = pstmt.executeQuery();
             rs.first();
             int frequency = rs.getInt("frequency");
-            informationList.add(frequency);//访问次数
+            informationList.add(frequency);//times of visi
             pstmt = conn.prepareStatement("select * from visit where stu_no=? ORDER BY event_time;");//根据label或者说学号查询学生的信息
             pstmt.setInt(1, stid);
             rs = pstmt.executeQuery();
             rs.last();
             String reason = rs.getString("reason");
-            String ann = rs.getString("remark");
-            informationList.add(reason);//最后访问那一次的原因和remark
+            String ann = rs.getString("remark"); //remark is announcement for student
+            informationList.add(reason);
             informationList.add(ann);
         } catch (Exception e) {
             System.out.printf(e.getMessage());
@@ -200,70 +206,5 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
         }
         return informationList;
     }
-//     static String[] findStudentByLabel(int n){
-//        String[] result=new String[5];
-//        try{
-//            sql="select * from student where stu_no='"+n+"';";
-//            
-//            pstmt = conn.prepareStatement(sql);
-//            rs=pstmt.executeQuery(sql);
-//            System.out.println(sql);
-////            DB0.rsmd=rs.getMetaData();
-//            String no=n+"";
-//            String andrew_id=rs.getString(2);
-//            String name=rs.getString(3);
-//            String program=rs.getString(4);
-//            String gender=rs.getString(5);
-//            result=new String[]{no,andrew_id,name,program,gender};
-//            
-//        }
-//        catch(SQLException e){
-//            System.out.println(e);
-//        }
-//        return result;
-//    }
-//    static String[] findEventByLabel(int n){
-//        String[] result=null;
-//        try{
-//            sql="select * from visit where stu_no='"+n+"';";
-//            rs=stmt.executeQuery(sql);
-//            rsmd=rs.getMetaData();
-//            String evtid=rs.getInt(1)+"";
-//            String evttime=rs.getDate(2)+"";
-//            String stu_no=n+"";
-//            String reason=rs.getString(4);
-//            String remark=rs.getString(5);
-//            result=new String[]{evtid,evttime,stu_no,reason,remark};
-//        }
-//        catch(SQLException e){
-//            System.out.println(e);
-//        }
-//        return result;
-//    }
-//    static int calcVisitTimeByLabel(int n){
-//        int result=0;
-//        try{
-//            sql="select count(*) from visit where stu_no='"+n+"';";
-//            rs=stmt.executeQuery(sql);
-//            rsmd=rs.getMetaData();
-//            result=rs.getInt(1);
-//        }
-//        catch(SQLException e){
-//            System.out.println(e);
-//        }
-//        return result;
-//    }
-//    static int findLastVisitTimeByLabel(int n){
-//        int result;
-//        try{
-//            sql="select max(event_time) from visit where stu_no='"+n+"';";
-//            rs=stmt.executeQuery(sql);
-//            rsmd=rs.getMetaData();
-//            result=rs.getDate(1);
-//        }
-//        catch(SQLException e){
-//            System.out.println(e);
-//        }
-//        return result;
-//    }
+
 }

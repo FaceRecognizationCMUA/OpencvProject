@@ -5,7 +5,7 @@
  */
 
 /**
- *
+ * GUI for confirm page.
  * @author Sky Xu <Sky Xu at Carnegie Mellon University>
  */
 public class IDConfirmWindow extends javax.swing.JFrame {
@@ -19,11 +19,10 @@ public class IDConfirmWindow extends javax.swing.JFrame {
     }
 public void setLabel(GUI w,int label)
 {
-//    M.findLabel("photodb_resized\\",stid);
     this.label=label;
     this.w=w;
     String[] id=DB.findNameByLabel(label);
-    String adr="photodb_resized\\"+label+"-"+id[1]+".jpg";
+    String adr="photodb_resized\\"+label+"-"+id[1]+".jpg";//read by student image by label predicted.
     piclabel.setIcon(new javax.swing.ImageIcon(adr));
     if(id[0]==null){
          namelabel.setText("We are not able to detect your face!");

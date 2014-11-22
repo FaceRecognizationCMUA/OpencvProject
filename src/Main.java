@@ -33,8 +33,9 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
 /**
- *
- * @author Sky Xu <Sky Xu at Carnegie Mellon University>
+ * @author Guangyao Xie
+ * @author Sky Xu
+ * @author Eason Lu
  */
 public class Main {
 
@@ -58,7 +59,7 @@ public class Main {
     /**
      * Call the real-time camera and resize the image to the size of
      * WIDTH*HEIGHT. The resized image is stored in the folder "img_resized".
-     *
+     * 
      * @throws Exception
      */
     public static String camera() throws Exception {
@@ -124,7 +125,13 @@ public class Main {
         frame.dispose();
         return imgPath;
     }
-
+/**
+ * This method is for 'Train' features. 
+ * 
+ * @author Guangyao Xie
+ * @param andrewid
+ * @return label of picture in photo folder
+ */
     public static int createLabelInput(String andrewid) {
         File DBroot = new File("photodb_resized/");
         FilenameFilter imgFilter = new FilenameFilter() {
@@ -138,18 +145,18 @@ public class Main {
 
         int i = 0;
         ArrayList<Integer> labelList = new ArrayList<>();
-        for (File f : imageFiles) {
-            String aid = f.getName().split("\\.|\\-")[1];
+        for (File f : imageFiles) { // example : 18-guangyax1.jpg
+            String aid = f.getName().split("\\.|\\-")[1];//pick string except label and '.jpg' : guangyax1
 
-            if (aid.split("\\d+")[0].equals(andrewid) && aid.equals(andrewid) == false) {
-                int d = Integer.parseInt(aid.split("\\D+")[1]);
+            if (aid.split("\\d+")[0].equals(andrewid) && aid.equals(andrewid) == false) {//accept guangyax1 but not guangyax
+                int d = Integer.parseInt(aid.split("\\D+")[1]); //pick the serial number of picture: 1
                 labelList.add(d);
                 //System.out.println(d);
             }
         }
         if (!labelList.isEmpty()) {
-            Collections.sort(labelList);
-            i = labelList.get(labelList.size() - 1);
+            Collections.sort(labelList); //sort the arraylist 
+            i = labelList.get(labelList.size() - 1);//get max serial number
             System.out.println("max label is " + i);
             System.out.println("new label is " + (i + 1));
             return i + 1;
@@ -171,7 +178,6 @@ public class Main {
         String xmlfilePath = FaceDetector.class.getResource("haarcascade_frontalface_alt.xml").getPath().substring(1);
         System.out.println(xmlfilePath);//test
         CascadeClassifier faceDetector = new CascadeClassifier(xmlfilePath);
-//        String imgPath=FaceDetector.class.getResource("cam_img/test.jpg").getPath().substring(1);
         Mat image = Highgui.imread(imgPath);
         System.out.println(imgPath);
         MatOfRect faceDetections = new MatOfRect();
@@ -186,7 +192,6 @@ public class Main {
         for (Rect rect : faceDetections.toArray()) {
             ImageFilter cropFilter = new CropImageFilter(rect.x, rect.y, rect.width, rect.height);
             BufferedImage tag = new BufferedImage(rect.width, rect.height, BufferedImage.TYPE_INT_RGB);
-//            File file = new File("build\\classes\\cam_img\\test.jpg");
             File file = new File(imgPath);
             BufferedImage src = ImageIO.read(file);
             Image img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(src.getSource(), cropFilter));
@@ -195,19 +200,24 @@ public class Main {
             g.drawImage(img, 0, 0, WIDTH, HEIGHT, null);
             g.dispose();
             dir = "img_resized\\cut_image.jpg";
-//            String dir = "trainset\\57-tx\\57-"+(count++)+".jpg";
             File dest = new File(dir);
             ImageIO.write(output, "JPEG", dest);
         }
         return dir;
     }
-
+/**
+ * Overload resize method.
+ * @param imgPath
+ * @param andrewId
+ * @param trainImageCount
+ * @return
+ * @throws Exception 
+ */
     public static String resize(String imgPath, String andrewId, int trainImageCount) throws Exception {
         System.out.println("\nRunning DetectFaceDemo");
         String xmlfilePath = FaceDetector.class.getResource("haarcascade_frontalface_alt.xml").getPath().substring(1);
         System.out.println(xmlfilePath);//test
         CascadeClassifier faceDetector = new CascadeClassifier(xmlfilePath);
-//        String imgPath=FaceDetector.class.getResource("cam_img/test.jpg").getPath().substring(1);
         Mat image = Highgui.imread(imgPath);
         System.out.println(imgPath);
         MatOfRect faceDetections = new MatOfRect();
@@ -218,7 +228,6 @@ public class Main {
         for (Rect rect : faceDetections.toArray()) {
             ImageFilter cropFilter = new CropImageFilter(rect.x, rect.y, rect.width, rect.height);
             BufferedImage tag = new BufferedImage(rect.width, rect.height, BufferedImage.TYPE_INT_RGB);
-//            File file = new File("build\\classes\\cam_img\\test.jpg");
             File file = new File(imgPath);
             BufferedImage src = ImageIO.read(file);
             Image img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(src.getSource(), cropFilter));
@@ -237,7 +246,7 @@ public class Main {
 
     /**
      * Find the label by andrew id.
-     *
+     * @author Guangyao Xie
      * @param trainDBdir directory of training set.
      * @param andrewid andrew id of student.
      * @return the label of student.
@@ -262,19 +271,7 @@ public class Main {
         return label;
     }
 
-//    static void init() {
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-////        facePanel.setVisible(false);
-//        frame.setSize(400, 400);
-//        frame.setBackground(Color.BLUE);
-//        frame.add(facePanel, BorderLayout.CENTER);
-////        frame.setVisible(false);
-//        frame.setEnabled(true);
-//        facePanel.setSize(400, 400);
-//        facePanel.setEnabled(true);
-//        facePanel.setVisible(false);
-//    }
+
 
     /**
      * This method receives parameter of andrew ID. It checks if this aID exist
@@ -331,7 +328,7 @@ public class Main {
     }
 
     /**
-     * This method executes insert query to the db
+     * This method executes insert query to the db.
      *
      * @author Guangyao Xie
      * @param label
@@ -354,18 +351,14 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-//        Main main=new Main();
         int sno;
-//        init();
-//        System.out.println(findLabel("photodb","hongl"));
+
         GUI w = new GUI();
         System.out.println("MAIN: " + Thread.currentThread());
         new GUI().setVisible(true);
 
         Recognizer.train("photodb_resized");
-//        camera();
-//        DB.connectDB();
-//        sno=Recognizer.recognize(camera());
+
 
     }
 }
