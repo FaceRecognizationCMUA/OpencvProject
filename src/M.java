@@ -123,6 +123,12 @@ public class M {
         return imgPath;
     }
 
+    /**
+     * This method is to create new label number through existing file name.
+     *
+     * @author Guangyao Xie
+     */
+
     public static int createLabelInput(String andrewid) {
         File DBroot = new File("photodb_resized/");
         FilenameFilter imgFilter = new FilenameFilter() {
