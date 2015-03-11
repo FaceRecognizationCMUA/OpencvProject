@@ -27,8 +27,8 @@ static final String URL = "jdbc:mysql://opencvdb.cxsp5jskrofy.us-west-2.rds.amaz
     static PreparedStatement pstmt = null;
     static ResultSet rs = null;
     static ResultSetMetaData rsmd=null;
-    static String username = "admin";
-    static String password = "cmua2014";
+    static String username;
+    static String password;
 
     public static Connection DBconnect() {
 
